@@ -18,15 +18,24 @@ def parseInput(lines):  # parses the input to the desired typ
                     while line[y] in "0123456789":
                         number += line[y]
                         y += 1
-                    partnums.append((number, i, y))
-            elif char != ".":
+                    partnums.append((number, i, y-len(number)))
+            elif char == "*":
                 parts.append((i, y))
+    return parts, partnums
 
-    return [parts, partnums]
 
-
-def solve(data):  # solves the question
-    return None
+def solve(data):  # solves the question#
+    parts, partnums = data
+    sol = 0
+    for part in parts:
+        neighbours = []
+        for partnum in partnums:
+            if part[0]-1 <= partnum[1] <= part[0]+1:
+                if part[1]-1 <= partnum[2]+len(partnum[0])-1 and partnum[2] <= part[1]+1:
+                    neighbours.append(partnum[0])
+        if len(neighbours) == 2:
+            sol += int(neighbours[0])* int(neighbours[1])
+    return sol
 
 
 def main():

@@ -30,7 +30,7 @@ def solve(data):  # solves the question#
     for partnum in partnums:
         is_neighbour = False
         for y in range(partnum[1]-1, partnum[1]+2):
-            for x in range(partnum[2]-1, partnum[2]+2+len(partnum[0])):
+            for x in range(partnum[2]-1, partnum[2]+1+len(partnum[0])):
                 if (y, x) in parts:
                     is_neighbour = True
         if is_neighbour:
