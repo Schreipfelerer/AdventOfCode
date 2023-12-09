@@ -15,11 +15,11 @@ def parseInput(lines):  # parses the input to the desired typ
 
 
 def solve(data):  # solves the question
-    pos = "AAA"
+    pos = [x for x in data[1] if x.endswith("A")]
     steps = 0
-    while pos != "ZZZ":
+    while any(not x.endswith("Z") for x in pos):
         direction = 0 if data[0][steps%len(data[0])] == "L" else 1
-        pos = data[1][pos][direction]
+        pos = [data[1][x][direction] for x in pos]
         steps +=1
     return steps
 
