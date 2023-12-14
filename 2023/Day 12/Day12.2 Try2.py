@@ -20,8 +20,14 @@ def parseInput(lines):  # parses the input to the desired typ
     return data
 
 
+memom = {}
+
 def getPossibilities(record):
     springs, arrangement = record
+    key = "X".join([str(x) for x in arrangement])+springs.lstrip(".")
+
+    if key in memom.keys():
+        return memom[key]
 
     arrangement_cp = arrangement[:]
     is_gap = True
@@ -51,14 +57,18 @@ def getPossibilities(record):
     index = springs.index("?")
     for replacement in ".#":
         possib += getPossibilities((springs[:index] + replacement + springs[index + 1:], arrangement))
+
+    memom[key] = possib
     return possib
 
 
 def solve(data):  # solves the question
+    global memom
     solution = 0
     old_time = time.time_ns()
     for i, record in enumerate(data):
         solution += getPossibilities(record)
+        memom = {}
         print(f"Line {i}: in {(time.time_ns()-old_time)/1000000:.2f} ms")
         old_time = time.time_ns()
     return solution
