@@ -13,7 +13,7 @@ def parseInput(lines):  # parses the input to the desired typ
         number = 0
         for char in line:
             if char in "0123456789":
-                number += 10*int(char)
+                number += 10 * int(char)
                 break
         for char in line[::-1]:
             if char in "0123456789":

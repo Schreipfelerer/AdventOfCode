@@ -7,7 +7,7 @@ with open("input.txt") as file:
         if each != "x":
             bus.append(int(each))
 
-smallest = time-1
+smallest = time - 1
 for num in bus:
     if num - (time % num) < smallest - (time % smallest):
         smallest = num

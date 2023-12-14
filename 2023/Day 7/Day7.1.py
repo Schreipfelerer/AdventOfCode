@@ -1,5 +1,6 @@
 import functools
 
+
 def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
     if use_example:
         with open('example.txt', 'r') as f:
@@ -20,7 +21,7 @@ def solve(data):  # solves the question
     winnings = 0
     data.sort(key=functools.cmp_to_key(compare))
     for i, hand in enumerate(data):
-        winnings += (i+1)*int(hand[1])
+        winnings += (i + 1) * int(hand[1])
     return winnings
 
 

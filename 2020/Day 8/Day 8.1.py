@@ -10,7 +10,7 @@ while not inst[i][2]:
     if inst[i][0] == "acc":
         acc += inst[i][1]
     elif inst[i][0] == "jmp":
-        i += inst[i][1]-1
+        i += inst[i][1] - 1
     i += 1
 
 print(acc)

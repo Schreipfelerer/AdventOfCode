@@ -105,7 +105,7 @@ for x in range(100):
         pickedCups.append(cup)
         c.remove(cup)
 
-    destinationCup = currentCup-1
+    destinationCup = currentCup - 1
     while not c.isPresent(destinationCup):
         destinationCup -= 1
         if destinationCup <= 0:
@@ -117,5 +117,3 @@ for x in range(100):
 
     currentCup = c.getRightFrom(currentCup)
     print(c.print(1))
-
-

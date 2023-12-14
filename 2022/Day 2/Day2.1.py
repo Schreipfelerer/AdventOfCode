@@ -8,8 +8,8 @@ def parseInput(lines):  # parses the input to the desired typ
     data = []
     for line in lines:
         data.append(line.split(" "))
-        data[-1][0] = ord(data[-1][0])-64
-        data[-1][1] = ord(data[-1][1].replace("X", "A").replace("Y", "B").replace("Z", "C"))-64
+        data[-1][0] = ord(data[-1][0]) - 64
+        data[-1][1] = ord(data[-1][1].replace("X", "A").replace("Y", "B").replace("Z", "C")) - 64
     return data
 
 

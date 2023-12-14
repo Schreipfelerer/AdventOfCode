@@ -14,7 +14,7 @@ def parseInput(lines):  # parses the input to the desired typ
     data = []
     for line in lines:
         for i, bit in enumerate(line.rstrip("\n")):
-            if len(data) < i+1:
+            if len(data) < i + 1:
                 data.append([])
             data[i].append(int(bit))
     return data
@@ -28,9 +28,9 @@ def solve(data):  # solves the question
         onlysave = int(not bool(min(set(oxygen_rating[i]), key=oxygen_rating[i].count)))
         num_pop = 0
         for j in range(len(position)):
-            if position[j-num_pop] != onlysave:
+            if position[j - num_pop] != onlysave:
                 for pos in oxygen_rating:
-                    pos.pop(j-num_pop)
+                    pos.pop(j - num_pop)
                 num_pop += 1
         if len(oxygen_rating) == 1:
             break
@@ -39,7 +39,7 @@ def solve(data):  # solves the question
         onlysave = min(set(co2_rating[i]), key=co2_rating[i].count)
         num_pop = 0
         for j in range(len(position)):
-            if position[j-num_pop] != onlysave:
+            if position[j - num_pop] != onlysave:
                 for pos in co2_rating:
                     pos.pop(j - num_pop)
                 num_pop += 1

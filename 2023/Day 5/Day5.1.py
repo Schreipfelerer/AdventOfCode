@@ -29,10 +29,10 @@ def solve(data):  # solves the question
     for map_con in data[1:]:
         for seed in seeds:
             for row in map_con:
-                if seed in range(row[1], row[1]+row[2]+1):
+                if seed in range(row[1], row[1] + row[2] + 1):
                     num = seed
                     seeds.remove(seed)
-                    seeds.insert(0, num-row[1]+row[0])
+                    seeds.insert(0, num - row[1] + row[0])
                     break
     return min(seeds)
 

@@ -22,11 +22,11 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     smallest = 0
     for i, row in enumerate(data):
-        if i != 0 and i != len(data)-1:
+        if i != 0 and i != len(data) - 1:
             for j, digit in enumerate(row):
                 if j != 0 and j != len(row) - 1:
-                    if digit < row[j-1] and digit < row[j+1] and digit < data[i-1][j] and digit < data[i+1][j]:
-                        smallest += digit+1
+                    if digit < row[j - 1] and digit < row[j + 1] and digit < data[i - 1][j] and digit < data[i + 1][j]:
+                        smallest += digit + 1
     return smallest
 
 

@@ -16,8 +16,8 @@ def parseInput(lines):  # parses the input to the desired typ
 
 def solve(data):  # solves the question
     scenic_score_high = 0
-    for x in range(1, len(data)-1):
-        for y in range(1, len(data)-1):
+    for x in range(1, len(data) - 1):
+        for y in range(1, len(data) - 1):
             scenic_score = 1
             for swap in [False, True]:
                 for negate in [False, True]:

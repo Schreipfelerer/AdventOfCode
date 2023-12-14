@@ -16,7 +16,7 @@ def solve(data):  # solves the question
         if c == ")":
             level -= 1
             if level == -1:
-                return i+1
+                return i + 1
 
 
 def main():

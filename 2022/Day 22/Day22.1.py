@@ -21,9 +21,9 @@ def solve(data):  # solves the question
     data, path = data
     longline = max([len(row) for row in data])
     data = [row.ljust(longline) for row in data]
-    rev = [data[i][::-1] for i in range(len(data)-1, -1, -1)]
+    rev = [data[i][::-1] for i in range(len(data) - 1, -1, -1)]
     rotated = ["".join([data[j][i] for j in range(len(data))]) for i in range(len(data[0]))]
-    rotated_rev = [rotated[i][::-1] for i in range(len(rotated)-1, -1, -1)]
+    rotated_rev = [rotated[i][::-1] for i in range(len(rotated) - 1, -1, -1)]
     facing = 0
     row = 0
     column = data[0].index(".")
@@ -33,10 +33,10 @@ def solve(data):  # solves the question
             for _ in range(op):
                 row_new = row
                 if facing % 2 == 1:
-                    row_new -= facing-2
+                    row_new -= facing - 2
                 column_new = column
                 if facing % 2 == 0:
-                    column_new -= facing-1
+                    column_new -= facing - 1
                 row_new %= len(data)
                 column_new %= len(data[0])
 
@@ -46,9 +46,11 @@ def solve(data):  # solves the question
                     if facing == 1:
                         row_new = min(rotated[column_new].index("."), rotated[column_new].index("#"))
                     if facing == 2:
-                        column_new = len(data[0]) - min(rev[len(data)-row_new].index("."), rev[len(data)-row_new].index("#")) - 1
+                        column_new = len(data[0]) - min(rev[len(data) - row_new].index("."),
+                                                        rev[len(data) - row_new].index("#")) - 1
                     if facing == 3:
-                        row_new = len(data) - min(rotated_rev[len(data[0])-column_new].index("."), rotated_rev[len(data[0])-column_new].index("#")) - 1
+                        row_new = len(data) - min(rotated_rev[len(data[0]) - column_new].index("."),
+                                                  rotated_rev[len(data[0]) - column_new].index("#")) - 1
                 if data[row_new][column_new] == "#":
                     break
                 if data[row_new][column_new] == ".":
@@ -58,7 +60,7 @@ def solve(data):  # solves the question
             facing += 1 if op == "R" else -1
             facing %= 4
 
-    return 1000 * (row+1) + 4 * (column+1) + facing
+    return 1000 * (row + 1) + 4 * (column + 1) + facing
 
 
 def main():

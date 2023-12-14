@@ -20,8 +20,8 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     counter = 0
     for line in data:
-        task1 = set(range(line[0][0], line[0][1]+1))
-        task2 = set(range(line[1][0], line[1][1]+1))
+        task1 = set(range(line[0][0], line[0][1] + 1))
+        task2 = set(range(line[1][0], line[1][1] + 1))
         if task1.intersection(task2) == task1 or task1.intersection(task2) == task2:
             counter += 1
     return counter

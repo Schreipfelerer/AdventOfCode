@@ -23,17 +23,17 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     data, path = data
     faces = sum([sum([1 for c in row if c == "." or c == "#"]) for row in data])
-    width = int(math.sqrt(faces//6))
-    data = [row.ljust(width*4) for row in data]
-    while len(data) < width*4:
-        data.append(" "*(width*4))
-    faces = [" "*4 for _ in range(4)]
+    width = int(math.sqrt(faces // 6))
+    data = [row.ljust(width * 4) for row in data]
+    while len(data) < width * 4:
+        data.append(" " * (width * 4))
+    faces = [" " * 4 for _ in range(4)]
     faces_aplha = list("ABCDEF")
     for row in range(4):
         for column in range(4):
-            c = data[row*width][column*width]
+            c = data[row * width][column * width]
             if c == "." or c == "#":
-                faces[row] = faces[row][:column]+faces_aplha.pop(0)+faces[row][column+1:]
+                faces[row] = faces[row][:column] + faces_aplha.pop(0) + faces[row][column + 1:]
 
     trans = [[[" ", -1] for _ in range(4)] for _ in range(6)]
 
@@ -54,21 +54,21 @@ def solve(data):  # solves the question
                     c2 = faces[row_new][column_new]
                     if c2 != " ":
                         trans[ord(c) - 65][face][0] = c2
-                        trans[ord(c) - 65][face][1] = (face+2) % 4
+                        trans[ord(c) - 65][face][1] = (face + 2) % 4
 
     for _ in range(4):
         for c in range(6):  # A
             for i in range(4):  # Facing AB for A
                 if trans[c][i][1] != -1:
                     for offset in (-1, 1):
-                        if trans[c][(i+offset) % 4][1] == -1:
+                        if trans[c][(i + offset) % 4][1] == -1:
                             index_target = ord(trans[c][i][0]) - 65  # Index of B
-                            facing_new = (trans[c][i][1]-offset) % 4  # Facing AB for B
+                            facing_new = (trans[c][i][1] - offset) % 4  # Facing AB for B
                             if trans[index_target][facing_new][1] != -1:
                                 new_c = trans[index_target][facing_new][0]  # C
-                                facing = (trans[index_target][facing_new][1]-offset) % 4  # Facing AC for A
+                                facing = (trans[index_target][facing_new][1] - offset) % 4  # Facing AC for A
                                 trans[c][(i + offset) % 4] = [new_c, facing]  # Set AC for A
-                                trans[ord(new_c) - 65][facing] = [chr(c+65), (i+offset) % 4]  # Set AC for C
+                                trans[ord(new_c) - 65][facing] = [chr(c + 65), (i + offset) % 4]  # Set AC for C
 
     facing = 0
     row = 0
@@ -78,18 +78,18 @@ def solve(data):  # solves the question
             for _ in range(op):
                 row_new = row
                 if facing % 2 == 1:
-                    row_new -= facing-2
+                    row_new -= facing - 2
                 column_new = column
                 if facing % 2 == 0:
-                    column_new -= facing-1
+                    column_new -= facing - 1
                 row_new %= len(data)
                 column_new %= len(data[0])
                 facing_new = facing
 
                 if data[row_new][column_new] == " ":
-                    a = faces[row//width][column//width]
-                    c, c_face = trans[ord(a)-65][facing]
-                    facing_new = (c_face+2) % 4
+                    a = faces[row // width][column // width]
+                    c, c_face = trans[ord(a) - 65][facing]
+                    facing_new = (c_face + 2) % 4
 
                     row_cell = row % width
                     column_cell = column % width
@@ -122,7 +122,7 @@ def solve(data):  # solves the question
             facing += 1 if op == "R" else -1
             facing %= 4
 
-    return 1000 * (row+1) + 4 * (column+1) + facing
+    return 1000 * (row + 1) + 4 * (column + 1) + facing
 
 
 def main():

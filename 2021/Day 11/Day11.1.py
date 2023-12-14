@@ -33,21 +33,21 @@ def solve(data):  # solves the question
                         flashes += 1
                         flashed = True
                         if i != 0 and j != 0:
-                            data[i-1][j-1] += 1
+                            data[i - 1][j - 1] += 1
                         if i != 0:
-                            data[i-1][j] += 1
+                            data[i - 1][j] += 1
                         if i != 0 and j != 9:
-                            data[i-1][j+1] += 1
+                            data[i - 1][j + 1] += 1
                         if j != 9:
-                            data[i][j+1] += 1
+                            data[i][j + 1] += 1
                         if i != 9 and j != 9:
-                            data[i+1][j+1] += 1
+                            data[i + 1][j + 1] += 1
                         if i != 9:
-                            data[i+1][j] += 1
+                            data[i + 1][j] += 1
                         if i != 9 and j != 0:
-                            data[i+1][j-1] += 1
+                            data[i + 1][j - 1] += 1
                         if j != 0:
-                            data[i][j-1] += 1
+                            data[i][j - 1] += 1
                         data[i][j] = -10
 
         for i, row in enumerate(data):

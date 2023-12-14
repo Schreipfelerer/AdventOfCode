@@ -12,14 +12,14 @@ def parseInput(lines):  # parses the input to the desired typ
 
 
 def solve(data):  # solves the question
-    char_dict = {"J" : [(0, -1), (-1, 0)],
-                 "L" : [(0, 1), (-1, 0)],
-                 "7" : [(0, -1), (1, 0)],
-                 "F" : [(0, 1), (1, 0)],
-                 "-" : [(0, 1), (0, -1)],
-                 "|" : [(1, 0), (-1, 0)],
-                 "." : [],
-                 "S" : []}
+    char_dict = {"J": [(0, -1), (-1, 0)],
+                 "L": [(0, 1), (-1, 0)],
+                 "7": [(0, -1), (1, 0)],
+                 "F": [(0, 1), (1, 0)],
+                 "-": [(0, 1), (0, -1)],
+                 "|": [(1, 0), (-1, 0)],
+                 ".": [],
+                 "S": []}
     index = (0, 0)
     for i, line in enumerate(data):
         if "S" in line:
@@ -35,7 +35,7 @@ def solve(data):  # solves the question
         if 0 <= y < len(data):
             if 0 <= x < len(data[y]):
                 char = data[y][x]
-                neg_offset =(-offset[0], -offset[1])
+                neg_offset = (-offset[0], -offset[1])
                 if neg_offset in char_dict[char]:
                     char_dict["S"].append(offset)
 
@@ -58,7 +58,7 @@ def solve(data):  # solves the question
 
     visited_tiles = []
     while start_index != index or len(visited_tiles) == 0:
-        index = (index[0]+direction[0], index[1]+direction[1])
+        index = (index[0] + direction[0], index[1] + direction[1])
         direction_list = char_dict[data[index[0]][index[1]]][:]
         direction_list.remove((-direction[0], -direction[1]))
         direction = direction_list[0]
@@ -72,14 +72,14 @@ def solve(data):  # solves the question
                 continue
             if (i, y) in visited_tiles:
                 continue
-            offset = (-1, 0) if i < len(data)//2 else (1, 0)
+            offset = (-1, 0) if i < len(data) // 2 else (1, 0)
             steps = 1
             edges = 0
             last_char = ""
-            while 0 <= i+offset[0]*steps < len(data) and 0 <= y+offset[1]*steps < len(data[i]):
-                if (i+offset[0]*steps, y+offset[1]*steps) in visited_tiles:
+            while 0 <= i + offset[0] * steps < len(data) and 0 <= y + offset[1] * steps < len(data[i]):
+                if (i + offset[0] * steps, y + offset[1] * steps) in visited_tiles:
                     non_dir = offset.index(0)
-                    current_char = data[i+offset[0]*steps][y+offset[1]*steps]
+                    current_char = data[i + offset[0] * steps][y + offset[1] * steps]
                     if any([char_dir[non_dir] for char_dir in char_dict[current_char]]):
                         if current_char in "FLJ7":
                             is_fake = False
@@ -105,7 +105,7 @@ def solve(data):  # solves the question
                         else:
                             edges += 1
                 steps += 1
-            if edges%2:
+            if edges % 2:
                 inside_loop += 1
             else:
                 add_to_outside = {(i, y)}
@@ -115,10 +115,10 @@ def solve(data):  # solves the question
                         if add_to_outside_tile not in visited_tiles:
                             if 0 <= add_to_outside_tile[0] < len(data) and 0 <= add_to_outside_tile[1] < len(data[0]):
                                 outside_tiles.append(add_to_outside_tile)
-                                add_to_outside.add((add_to_outside_tile[0]+1, add_to_outside_tile[1]))
-                                add_to_outside.add((add_to_outside_tile[0]-1, add_to_outside_tile[1]))
-                                add_to_outside.add((add_to_outside_tile[0], add_to_outside_tile[1]+1))
-                                add_to_outside.add((add_to_outside_tile[0], add_to_outside_tile[1]-1))
+                                add_to_outside.add((add_to_outside_tile[0] + 1, add_to_outside_tile[1]))
+                                add_to_outside.add((add_to_outside_tile[0] - 1, add_to_outside_tile[1]))
+                                add_to_outside.add((add_to_outside_tile[0], add_to_outside_tile[1] + 1))
+                                add_to_outside.add((add_to_outside_tile[0], add_to_outside_tile[1] - 1))
 
     return inside_loop
 

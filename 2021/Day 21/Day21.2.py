@@ -19,10 +19,10 @@ def solve(data):  # solves the question
     last_roll = 0
     turn_p1 = True
     while s1 < 1000 and s2 < 1000:
-        roll = last_roll*3+6 % 10
+        roll = last_roll * 3 + 6 % 10
         last_roll += 3
         if turn_p1:
-            p1 = ((p1 + roll-1) % 10) + 1
+            p1 = ((p1 + roll - 1) % 10) + 1
             s1 += p1
         else:
             p2 = ((p2 + roll - 1) % 10) + 1

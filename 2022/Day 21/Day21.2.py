@@ -28,7 +28,7 @@ def makeString(m, data):
                     ms[1] = "=="
                 if ms[1] == "/":
                     ms[1] = "//"
-                return "("+makeString(ms[0], data)+")"+ms[1]+"("+makeString(ms[2], data)+")"
+                return "(" + makeString(ms[0], data) + ")" + ms[1] + "(" + makeString(ms[2], data) + ")"
 
 
 def getX(m, solution, data):
@@ -59,14 +59,14 @@ def getX(m, solution, data):
                                 return a - b
                     case "*":
                         def op(a, b):
-                            return b//a
+                            return b // a
                     case "/":
                         if not swapped:
                             def op(a, b):
                                 return a * b
                         else:
                             def op(a, b):
-                                return a//b
+                                return a // b
                     case _:
                         def op():
                             assert False

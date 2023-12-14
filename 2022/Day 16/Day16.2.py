@@ -34,7 +34,7 @@ def solve(data):  # solves the question
 
 
 def traverse(room_me, room_el, pot, minutes, trav_m, rooms, stun_me, stun_el):
-    if minutes-max(stun_el, stun_me) < 0:
+    if minutes - max(stun_el, stun_me) < 0:
         return -1
     if stun_me > 0 and stun_el > 0:
         return traverse(room_me, room_el, pot, minutes - 1, trav_m, rooms, stun_me - 1, stun_el - 1)
@@ -43,13 +43,15 @@ def traverse(room_me, room_el, pot, minutes, trav_m, rooms, stun_me, stun_el):
         for i, room in enumerate(rooms):
             timespent = trav_m[room_me][room[0]] + 1
             new_pot = pot + room[1] * (minutes - timespent)
-            pos.append(traverse(room[0], room_el, new_pot, minutes, trav_m, rooms[:i] + rooms[i + 1:], timespent, stun_el))
+            pos.append(
+                traverse(room[0], room_el, new_pot, minutes, trav_m, rooms[:i] + rooms[i + 1:], timespent, stun_el))
     else:
         pos = [pot]
         for i, room in enumerate(rooms):
             timespent = trav_m[room_el][room[0]] + 1
             new_pot = pot + room[1] * (minutes - timespent)
-            pos.append(traverse(room_me, room[0], new_pot, minutes, trav_m, rooms[:i] + rooms[i + 1:], stun_me, timespent))
+            pos.append(
+                traverse(room_me, room[0], new_pot, minutes, trav_m, rooms[:i] + rooms[i + 1:], stun_me, timespent))
     return max(pos)
 
 

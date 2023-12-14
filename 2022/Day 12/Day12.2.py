@@ -17,7 +17,7 @@ def parseInput(lines):  # parses the input to the desired typ
             elif char == "E":
                 char = "z"
                 e = (len(data), len(row))
-            row.append(ord(char)-97)
+            row.append(ord(char) - 97)
         data.append(row)
     return s, e, data
 
@@ -39,7 +39,7 @@ def solve(data):  # solves the question
         step = steps[x][y]
         for change in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
             if 0 <= x + change[0] < len(grid) and 0 <= y + change[1] < len(grid[0]):
-                if elev-1 <= grid[x + change[0]][y + change[1]] and steps[x + change[0]][y + change[1]] == 1000000:
+                if elev - 1 <= grid[x + change[0]][y + change[1]] and steps[x + change[0]][y + change[1]] == 1000000:
                     steps[x + change[0]][y + change[1]] = step + 1
                     queue.append(((x + change[0]), (y + change[1])))
 

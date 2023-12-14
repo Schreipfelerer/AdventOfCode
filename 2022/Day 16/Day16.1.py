@@ -28,7 +28,8 @@ def solve(data):  # solves the question
                         if trav_m[i][k] == -1:
                             trav_m[i][k] = trav_m[i][j] + 1
                             changed = True
-    return traverse([i for i in range(len(data)) if data[i][0] == "AA"][0], 0, 30, trav_m, [(i, data[i][1]) for i in range(len(data)) if data[i][1]])
+    return traverse([i for i in range(len(data)) if data[i][0] == "AA"][0], 0, 30, trav_m,
+                    [(i, data[i][1]) for i in range(len(data)) if data[i][1]])
 
 
 def traverse(current_room, potential, minutes_left, trav_m, rooms):
@@ -37,9 +38,9 @@ def traverse(current_room, potential, minutes_left, trav_m, rooms):
     pos = [potential]
     for i, room in enumerate(rooms):
         new_room = room[0]
-        new_min = minutes_left-trav_m[current_room][room[0]]-1
-        new_pot = potential+room[1]*new_min
-        pos.append(traverse(new_room, new_pot, new_min, trav_m, rooms[:i]+rooms[i+1:]))
+        new_min = minutes_left - trav_m[current_room][room[0]] - 1
+        new_pot = potential + room[1] * new_min
+        pos.append(traverse(new_room, new_pot, new_min, trav_m, rooms[:i] + rooms[i + 1:]))
     return max(pos)
 
 

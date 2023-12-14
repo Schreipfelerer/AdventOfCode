@@ -1,11 +1,10 @@
 filelines = open("input.txt").read().split("\n")
 
 rules_str = filelines[:filelines.index("")]
-testlines = filelines[filelines.index("")+1:]
+testlines = filelines[filelines.index("") + 1:]
 max_len = max(testlines, key=len)
 
-
-rules = [None]*len(rules_str)
+rules = [None] * len(rules_str)
 for i in range(len(rules_str)):
     rules[int(rules_str[i].split(": ")[0])] = rules_str[i].split(": ")[1]
 
@@ -25,14 +24,14 @@ def match_rule(rule_index: int):
             if rule_index == 8:
                 safed_rules = set()
                 for i in range(1, 10):
-                    safed_rules.add("0"*i*8)
+                    safed_rules.add("0" * i * 8)
                 rules[8] = safed_rules
                 return
 
             if rule_index == 11:
                 safed_rules = set()
                 for i in range(1, 10):
-                    safed_rules.add("0"*i*16)
+                    safed_rules.add("0" * i * 16)
                 rules[11] = safed_rules
                 return
 
@@ -82,4 +81,3 @@ for testline in testlines:
             break
 
 print(passing_lines)
-

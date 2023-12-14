@@ -51,7 +51,7 @@ for instruction in wire2:
 shortest_D = 999999
 for pos1 in past_postitions1:
     if pos1 in past_postitions2:
-        distance = abs(pos1[0])+abs(pos1[1])
+        distance = abs(pos1[0]) + abs(pos1[1])
         if distance < shortest_D:
             shortest_D = distance
 

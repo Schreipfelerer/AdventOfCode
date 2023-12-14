@@ -18,7 +18,7 @@ def solve(data):  # solves the question
     for sensor in data:
         md = get_md(sensor[0], sensor[1], sensor[2], sensor[3])
         dif = md - abs(sensor[1] - y_of_interest)
-        for i in range(dif+1):
+        for i in range(dif + 1):
             notpos.add(sensor[0] + i)
             notpos.add(sensor[0] - i)
 

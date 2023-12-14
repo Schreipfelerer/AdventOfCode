@@ -11,7 +11,7 @@ def parseInput(lines):  # parses the input to the desired typ
     data = []
     for line in lines:
         for i, bit in enumerate(line.rstrip("\n")):
-            if len(data) < i+1:
+            if len(data) < i + 1:
                 data.append([])
             data[i].append(bit)
     return data

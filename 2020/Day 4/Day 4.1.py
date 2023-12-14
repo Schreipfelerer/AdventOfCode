@@ -3,7 +3,6 @@ with open("input.txt") as file:
     for line in file:
         c.append(line.rstrip("\n"))
 
-
 dic = {}
 col = []
 for each in c:
@@ -15,7 +14,6 @@ for each in c:
             point = data.split(":")
             dic[point[0]] = point[1]
 col.append(dic)
-
 
 valid = 0
 
@@ -39,6 +37,5 @@ def check_valid(p):
 for passport in col:
     if check_valid(passport):
         valid += 1
-
 
 print(valid)

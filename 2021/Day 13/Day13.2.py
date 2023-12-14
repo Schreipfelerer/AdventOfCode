@@ -41,10 +41,10 @@ def solve(data):  # solves the question
     for fold in folds:
         if fold[0] == "x":
             for i in range(0, fold[1]):
-                if 1350 > (fold[1]*2)-i:
+                if 1350 > (fold[1] * 2) - i:
                     for j in range(1350):
                         if dots[i][j] == 0:
-                            dots[i][j] = dots[(fold[1]*2)-i][j]
+                            dots[i][j] = dots[(fold[1] * 2) - i][j]
             for i in range(fold[1], 1350):
                 for j in range(1350):
                     dots[i][j] = 0
@@ -53,7 +53,7 @@ def solve(data):  # solves the question
                 if 1350 > (fold[1] * 2) - i:
                     for j in range(1350):
                         if dots[j][i] == 0:
-                            dots[j][i] = dots[j][(fold[1]*2)-i]
+                            dots[j][i] = dots[j][(fold[1] * 2) - i]
             for i in range(fold[1], 1350):
                 for j in range(1350):
                     dots[j][i] = 0

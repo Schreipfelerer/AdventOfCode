@@ -17,9 +17,9 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     wc = 0
     for mils in range(data[0]):
-        distance = (data[0]-mils)*mils
-        if distance>data[1]:
-            wc+= 1
+        distance = (data[0] - mils) * mils
+        if distance > data[1]:
+            wc += 1
     return wc
 
 

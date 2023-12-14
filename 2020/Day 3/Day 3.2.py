@@ -12,10 +12,10 @@ def start(acc_x, acc_y):
         x += acc_x
         y += acc_y
         try:
-            if (c[y][x % (len(c[y])-1)]) == "#":
+            if (c[y][x % (len(c[y]) - 1)]) == "#":
                 num += 1
         except IndexError:
             return num
 
 
-print(str(start(1, 1)*start(3, 1)*start(5, 1)*start(7, 1)*start(1, 2)))
+print(str(start(1, 1) * start(3, 1) * start(5, 1) * start(7, 1) * start(1, 2)))

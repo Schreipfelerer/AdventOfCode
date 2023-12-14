@@ -14,8 +14,8 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     ribbon = 0
     for present in data:
-        ribbon += 2*(min(present[0]+present[1], present[0]+present[2], present[1]+present[2]))
-        ribbon += present[0]*present[1]*present[2]
+        ribbon += 2 * (min(present[0] + present[1], present[0] + present[2], present[1] + present[2]))
+        ribbon += present[0] * present[1] * present[2]
     return ribbon
 
 

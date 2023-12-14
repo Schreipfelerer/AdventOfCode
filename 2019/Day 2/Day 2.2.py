@@ -20,5 +20,5 @@ for noun in range(0, 100):
             index += 4
 
         if numbers[0] == 19690720:
-            print(str(noun*100+verb))
+            print(str(noun * 100 + verb))
             exit()

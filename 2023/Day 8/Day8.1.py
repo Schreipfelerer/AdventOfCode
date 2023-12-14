@@ -18,9 +18,9 @@ def solve(data):  # solves the question
     pos = "AAA"
     steps = 0
     while pos != "ZZZ":
-        direction = 0 if data[0][steps%len(data[0])] == "L" else 1
+        direction = 0 if data[0][steps % len(data[0])] == "L" else 1
         pos = data[1][pos][direction]
-        steps +=1
+        steps += 1
     return steps
 
 

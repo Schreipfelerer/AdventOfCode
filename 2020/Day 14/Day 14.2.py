@@ -1,7 +1,7 @@
 def get_all_index(uib, m):
     for i in range(36):
         if m[i] == "X":
-            return get_all_index(uib, m[:i] + "1" + m[i+1:]) + get_all_index(uib, m[:i] + "Z" + m[i+1:])
+            return get_all_index(uib, m[:i] + "1" + m[i + 1:]) + get_all_index(uib, m[:i] + "Z" + m[i + 1:])
 
     mib = ""
     for i in range(36):
@@ -28,11 +28,10 @@ for instruction in f:
     if operation.startswith("mem"):
         index = operation[4:-1]
         index_bin = bin(int(index))[2:]
-        unmasked_index_bin = (36-len(index_bin))*"0" + index_bin
+        unmasked_index_bin = (36 - len(index_bin)) * "0" + index_bin
 
         masked_indexes = get_all_index(unmasked_index_bin, mask)
         for masked_index in masked_indexes:
             mem[masked_index] = int(value)
-
 
 print(sum(mem.values()))

@@ -8,14 +8,15 @@ def solve(expression):
             while expression[i] != "+":
                 i += 2
             if i != 1:
-                return solve(expression[:i-1] + [str(int(expression[i-1]) + int(expression[i+1]))] + expression[i+2:])
+                return solve(
+                    expression[:i - 1] + [str(int(expression[i - 1]) + int(expression[i + 1]))] + expression[i + 2:])
             else:
                 return solve([str(int(expression[i - 1]) + int(expression[i + 1]))] + expression[i + 2:])
         else:
             return solve([str(int(expression[0]) * int(expression[2]))] + expression[3:])
 
     start = None
-    for i in range(len(expression)-1, -1, -1):
+    for i in range(len(expression) - 1, -1, -1):
         if expression[i].startswith("("):
             start = i
     end = start
@@ -25,7 +26,8 @@ def solve(expression):
         end += 2
         num_open += expression[end].count("(")
         num_close += expression[end].count(")")
-    return solve(expression[:start] + solve([expression[start][1:]] + expression[start + 1:end] + [expression[end][:-1]]) + expression[end + 1:])
+    return solve(expression[:start] + solve(
+        [expression[start][1:]] + expression[start + 1:end] + [expression[end][:-1]]) + expression[end + 1:])
 
 
 result_list = []

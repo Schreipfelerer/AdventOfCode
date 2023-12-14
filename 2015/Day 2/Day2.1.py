@@ -14,8 +14,8 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     paper = 0
     for present in data:
-        paper += 2*(present[0]*present[1]+present[0]*present[2]+present[1]*present[2])
-        paper += min(present[0]*present[1], present[0]*present[2], present[1]*present[2])
+        paper += 2 * (present[0] * present[1] + present[0] * present[2] + present[1] * present[2])
+        paper += min(present[0] * present[1], present[0] * present[2], present[1] * present[2])
     return paper
 
 

@@ -37,7 +37,7 @@ def solve(data):  # solves the question
             if "blue" in game_set and game_set["blue"] > blues:
                 blues = game_set["blue"]
 
-        id_sum += reds*greens*blues
+        id_sum += reds * greens * blues
     return id_sum
 
 

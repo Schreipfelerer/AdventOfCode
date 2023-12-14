@@ -19,9 +19,9 @@ def solve(data):  # solves the question
     for race in range(len(data[0])):
         wc = 0
         for mils in range(data[0][race]):
-            distance = (data[0][race]-mils)*mils
-            if distance>data[1][race]:
-                wc+= 1
+            distance = (data[0][race] - mils) * mils
+            if distance > data[1][race]:
+                wc += 1
         multi *= wc
     return multi
 

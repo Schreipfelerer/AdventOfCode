@@ -12,7 +12,8 @@ while c != c_copy:
                 adjacent = 0
                 for x_off in range(-1, 2):
                     for y_off in range(-1, 2):
-                        if (x_off != 0 or y_off != 0) and (x + x_off >= 0 and y + y_off >= 0) and (x + x_off < len(c) and y + y_off < len(c[x])):
+                        if (x_off != 0 or y_off != 0) and (x + x_off >= 0 and y + y_off >= 0) and (
+                                x + x_off < len(c) and y + y_off < len(c[x])):
                             adjacent += 1 if c_copy[x + x_off][y + y_off] == "#" else 0
                 if adjacent == 0:
                     c[x][y] = "#"

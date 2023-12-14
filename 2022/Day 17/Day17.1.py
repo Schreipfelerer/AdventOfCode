@@ -22,7 +22,7 @@ def solve(data):  # solves the question
                 break
 
         x = 2
-        y = len(piece)+2+highest
+        y = len(piece) + 2 + highest
 
         while len(grid) <= y:
             grid.append("       ")
@@ -44,10 +44,10 @@ def solve(data):  # solves the question
                         check_points.append([x - 1 + len(row) - len(row.lstrip(".")), y - j])
             else:
                 if i % len(pieces) == 1:
-                    check_points = [[x, y-2], [x+1, y-3], [x+2, y-2]]
+                    check_points = [[x, y - 2], [x + 1, y - 3], [x + 2, y - 2]]
                 else:
                     for j in range(len(piece[-1])):
-                        check_points.append([x+j, y-len(piece)])
+                        check_points.append([x + j, y - len(piece)])
 
             is_clear = True
             for p in check_points:
@@ -68,7 +68,7 @@ def solve(data):  # solves the question
                 for y_off, row in enumerate(piece):
                     for x_off, p in enumerate(row):
                         if p == "#":
-                            grid[y-y_off] = grid[y-y_off][:x+x_off] + "#" + grid[y-y_off][x+x_off+1:]
+                            grid[y - y_off] = grid[y - y_off][:x + x_off] + "#" + grid[y - y_off][x + x_off + 1:]
 
             do_push = not do_push
 

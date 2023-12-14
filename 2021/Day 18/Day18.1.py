@@ -1,5 +1,6 @@
 import ast
 
+
 def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
     if use_example:
         with open('example.txt', 'r') as f:
@@ -19,7 +20,7 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     number = data[0]
     for num in data[1:]:
-        number = "["+number+","+num+"]"
+        number = "[" + number + "," + num + "]"
         fully_reduced = False
 
         while not fully_reduced:
@@ -36,7 +37,7 @@ def solve(data):  # solves the question
 def mag(e):
     if type(e) == int:
         return e
-    return mag(e[0])*3 + mag(e[1])*2
+    return mag(e[0]) * 3 + mag(e[1]) * 2
 
 
 def explode(number):
@@ -66,19 +67,19 @@ def explode(number):
     rightreplace = -1
     offset = 0
     if break_index != -1:
-        leftnum = int(number[break_index+1:break_stop_index].split(",")[0])
-        rightnum = int(number[break_index+1:break_stop_index].split(",")[1])
+        leftnum = int(number[break_index + 1:break_stop_index].split(",")[0])
+        rightnum = int(number[break_index + 1:break_stop_index].split(",")[1])
         left_is_two_digit = False
         right_is_two_digit = False
         if leftmost_index != -1:
             leftreplace = leftnum + int(number[leftmost_index])
-            if number[leftmost_index-1] in "0123456789":
-                leftreplace = leftnum + int(number[leftmost_index-1:leftmost_index+1])
+            if number[leftmost_index - 1] in "0123456789":
+                leftreplace = leftnum + int(number[leftmost_index - 1:leftmost_index + 1])
                 left_is_two_digit = True
         if rightmost_index != -1:
             rightreplace = rightnum + int(number[rightmost_index])
-            if number[rightmost_index+1] in "0123456789":
-                rightreplace = rightnum + int(number[rightmost_index:rightmost_index+2])
+            if number[rightmost_index + 1] in "0123456789":
+                rightreplace = rightnum + int(number[rightmost_index:rightmost_index + 2])
                 right_is_two_digit = True
 
         if leftreplace != -1:
@@ -87,12 +88,12 @@ def explode(number):
                 offset += 1
             if left_is_two_digit:
                 offset -= 1
-                number = number[:leftmost_index-1] + number[leftmost_index:]
+                number = number[:leftmost_index - 1] + number[leftmost_index:]
         if rightreplace != -1:
             if right_is_two_digit:
-                number = number[:rightmost_index+1] + number[rightmost_index+2:]
+                number = number[:rightmost_index + 1] + number[rightmost_index + 2:]
             number = number[:rightmost_index + offset] + str(rightreplace) + number[rightmost_index + offset + 1:]
-        number = number[:break_index+offset]+"0"+number[break_stop_index+offset+1:]
+        number = number[:break_index + offset] + "0" + number[break_stop_index + offset + 1:]
 
     return number
 
@@ -110,13 +111,13 @@ def split(number):
             last_num = -1
 
     if break_index != -1:
-        oldnum = int(number[break_index-1]+number[break_index])
+        oldnum = int(number[break_index - 1] + number[break_index])
         if oldnum % 2 == 0:
             newnum = f"[{int(oldnum / 2)},{int(oldnum / 2)}]"
         else:
-            newnum = f"[{int(oldnum / 2)},{int(oldnum / 2)+1}]"
+            newnum = f"[{int(oldnum / 2)},{int(oldnum / 2) + 1}]"
 
-        number = number[:break_index-1]+newnum+number[break_index+1:]
+        number = number[:break_index - 1] + newnum + number[break_index + 1:]
 
     return number
 

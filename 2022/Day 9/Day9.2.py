@@ -28,9 +28,9 @@ def solve(data):  # solves the question
                 head[1] -= 1
 
             for i in range(9):
-                pull = head if i == 0 else tails[i-1]
+                pull = head if i == 0 else tails[i - 1]
                 gets_pull = tails[i]
-                if abs(pull[0]-gets_pull[0]) > 1 or abs(pull[1]-gets_pull[1]) > 1:
+                if abs(pull[0] - gets_pull[0]) > 1 or abs(pull[1] - gets_pull[1]) > 1:
                     if gets_pull[0] == pull[0]:
                         gets_pull[1] += 1 if pull[1] > gets_pull[1] else -1
                     elif gets_pull[1] == pull[1]:

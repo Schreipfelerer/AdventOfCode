@@ -25,15 +25,20 @@ def solve(data):  # solves the question
             if monkey[1][0] in monkeys.keys() and monkey[1][2] in monkeys.keys():
                 match monkey[1][1]:
                     case "+":
-                        def op(a, b): return a + b
+                        def op(a, b):
+                            return a + b
                     case "-":
-                        def op(a, b): return a - b
+                        def op(a, b):
+                            return a - b
                     case "*":
-                        def op(a, b): return a * b
+                        def op(a, b):
+                            return a * b
                     case "/":
-                        def op(a, b): return a // b
+                        def op(a, b):
+                            return a // b
                     case _:
-                        def op(): assert False
+                        def op():
+                            assert False
                 monkeys[monkey[0]] = op(monkeys[monkey[1][0]], monkeys[monkey[1][2]])
                 data.remove(monkey)
 

@@ -11,8 +11,8 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     priority = 0
     for i in range(0, len(data), 3):
-        common = "".join(set(data[i]).intersection(data[i+1]).intersection(data[i+2]))
-        priority += ord(common)-64+26 if common.isupper() else ord(common)-96
+        common = "".join(set(data[i]).intersection(data[i + 1]).intersection(data[i + 2]))
+        priority += ord(common) - 64 + 26 if common.isupper() else ord(common) - 96
     return priority
 
 

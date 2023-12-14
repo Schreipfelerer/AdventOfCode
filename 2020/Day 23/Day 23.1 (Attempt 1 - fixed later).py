@@ -20,7 +20,7 @@ def printCups(coll, cur_cup, msg=""):
             string_list.append("(" + str(el) + ")")
         else:
             string_list.append(" " + str(el) + " ")
-    #print(msg + " ".join(string_list))
+    # print(msg + " ".join(string_list))
 
 
 cups = []
@@ -30,10 +30,10 @@ for cup in fileline[0]:  # Parse Input
 current_cup = cups[0]
 
 for x in range(100):
-    #print("--move: " + str(x+1) + " --")
+    # print("--move: " + str(x+1) + " --")
     index = cups.index(current_cup)
 
-    #printCups(cups, current_cup, "Before Pick Up:")
+    # printCups(cups, current_cup, "Before Pick Up:")
 
     pickCups = []
     p_index = (index + 1) % len(cups)
@@ -43,8 +43,8 @@ for x in range(100):
         pickCups.append(cups[p_index])
         cups.remove(cups[p_index])
 
-    #printCups(cups, current_cup, "After Pick Up: ")
-    #print("")
+    # printCups(cups, current_cup, "After Pick Up: ")
+    # print("")
 
     destination_cup = current_cup - 1
     while destination_cup not in cups:  # Get Destination Cup
@@ -54,21 +54,18 @@ for x in range(100):
 
     destination_index = cups.index(destination_cup)
 
-    #printCups(cups, destination_cup, "Before Insertion Up:")
+    # printCups(cups, destination_cup, "Before Insertion Up:")
     offset = 0
     original_len = len(cups)
     for pCup in pickCups:  # Place Picked Ups Cup
         offset += 1
-        index = (cups.index(destination_cup)+offset) % len(cups)
+        index = (cups.index(destination_cup) + offset) % len(cups)
         cups.insert(index, pCup)
 
-    #printCups(cups, destination_cup, "After Insertion Up: ")
-    #print("")
-    #print("")
+    # printCups(cups, destination_cup, "After Insertion Up: ")
+    # print("")
+    # print("")
 
     current_cup = cups[(cups.index(current_cup) + 1) % len(cups)]
-    #printNice()
+    # printNice()
     pass
-
-
-

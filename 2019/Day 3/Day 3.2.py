@@ -63,7 +63,7 @@ for pos1 in past_postitions1:
     for pos2 in past_postitions2:
         if pos1[0] == pos2[0]:
             if pos1[1] == pos2[1]:
-                distance = pos1[2]+pos2[2]
+                distance = pos1[2] + pos2[2]
                 if distance < shortest_D:
                     shortest_D = distance
 

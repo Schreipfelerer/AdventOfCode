@@ -16,11 +16,11 @@ def parseInput(lines):  # parses the input to the desired typ
 
 def solve(data):  # solves the question
     min_fuel = None
-    for i in range(min(data), max(data)+1):
+    for i in range(min(data), max(data) + 1):
         crabs = data[:]
         fuelcost = 0
         for crab in crabs:
-            fuelcost += sum(range(1, abs(i-crab)+1))
+            fuelcost += sum(range(1, abs(i - crab) + 1))
         if not min_fuel or min_fuel > fuelcost:
             min_fuel = fuelcost
     return min_fuel

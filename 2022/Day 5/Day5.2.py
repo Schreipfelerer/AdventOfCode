@@ -34,7 +34,7 @@ def solve(data):  # solves the question
                 stacks[i].append(loc[i])
 
     for move in moves:
-        start = max(len(stacks[move[1]-1])-move[0], 0)
+        start = max(len(stacks[move[1] - 1]) - move[0], 0)
         stacks[move[2] - 1] = stacks[move[2] - 1] + stacks[move[1] - 1][start:]
         stacks[move[1] - 1] = stacks[move[1] - 1][:start]
 

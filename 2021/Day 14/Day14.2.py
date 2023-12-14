@@ -22,8 +22,8 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     polymer, rules = data
     polymer_pairs = []
-    for i in range(len(polymer)-1):
-        pp = polymer[i]+polymer[i+1]
+    for i in range(len(polymer) - 1):
+        pp = polymer[i] + polymer[i + 1]
         inserted = False
         for poly_pair in polymer_pairs:
             if poly_pair[0] == pp:
@@ -37,7 +37,7 @@ def solve(data):  # solves the question
         for pp in deepcopy(polymer_pairs):
             for rule in rules:
                 if rule[0] == pp[0]:
-                    new_pairs = [[pp[0][0]+rule[1], pp[1]], [rule[1]+pp[0][1], pp[1]]]
+                    new_pairs = [[pp[0][0] + rule[1], pp[1]], [rule[1] + pp[0][1], pp[1]]]
                     for new_pair in new_pairs:
                         inserted = False
                         for poly_pair in polymer_pairs:
@@ -63,7 +63,7 @@ def solve(data):  # solves the question
     else:
         counts[polymer[-1]] = 1
 
-    return counts[max(counts, key=counts.get)]-counts[min(counts, key=counts.get)]
+    return counts[max(counts, key=counts.get)] - counts[min(counts, key=counts.get)]
 
 
 def main():

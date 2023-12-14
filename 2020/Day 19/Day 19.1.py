@@ -1,9 +1,9 @@
 filelines = open("example.txt").read().split("\n")
 
 rules_str = filelines[:filelines.index("")]
-testlines = filelines[filelines.index("")+1:]
+testlines = filelines[filelines.index("") + 1:]
 
-rules = [None]*len(rules_str)
+rules = [None] * len(rules_str)
 for i in range(len(rules_str)):
     rules[int(rules_str[i].split(": ")[0])] = rules_str[i].split(": ")[1]
 
@@ -32,7 +32,7 @@ def match_rule(rule_index: int):
                     new_rules = set()
                     for rule_1 in rules_to_add:
                         for rule_2 in rules[int(dependecie)]:
-                            new_rule = rule_1+rule_2
+                            new_rule = rule_1 + rule_2
                             new_rules.add(new_rule)
 
                     rules_to_add = new_rules

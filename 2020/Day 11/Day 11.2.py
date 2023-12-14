@@ -19,7 +19,8 @@ while c != c_copy:
                             while see == ".":
                                 real_x_off += x_off
                                 real_y_off += y_off
-                                if(x + real_x_off >= 0 and y + real_y_off >= 0) and (x + real_x_off < len(c) and y + real_y_off < len(c[x])):
+                                if (x + real_x_off >= 0 and y + real_y_off >= 0) and (
+                                        x + real_x_off < len(c) and y + real_y_off < len(c[x])):
                                     see = c_copy[x + real_x_off][y + real_y_off]
                                 else:
                                     see = "L"

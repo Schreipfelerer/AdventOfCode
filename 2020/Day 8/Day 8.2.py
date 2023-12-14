@@ -24,7 +24,7 @@ try:
             if inst[i][0] == "acc":
                 acc += inst[i][1]
             elif inst[i][0] == "jmp":
-                i += inst[i][1]-1
+                i += inst[i][1] - 1
             i += 1
         for i in range(len(inst)):
             inst[i][2] = False

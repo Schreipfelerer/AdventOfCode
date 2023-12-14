@@ -17,7 +17,8 @@ def solve(expression):
         end += 2
         num_open += expression[end].count("(")
         num_close += expression[end].count(")")
-    return solve(expression[:start] + solve([expression[start][1:]] + expression[start + 1:end] + [expression[end][:-1]]) + expression[end + 1:])
+    return solve(expression[:start] + solve(
+        [expression[start][1:]] + expression[start + 1:end] + [expression[end][:-1]]) + expression[end + 1:])
 
 
 result_list = []

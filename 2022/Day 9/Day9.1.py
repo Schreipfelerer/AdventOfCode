@@ -27,7 +27,7 @@ def solve(data):  # solves the question
             elif move[0] == "D":
                 head[1] -= 1
 
-            if abs(head[0]-tail[0]) > 1 or abs(head[1]-tail[1]) > 1:
+            if abs(head[0] - tail[0]) > 1 or abs(head[1] - tail[1]) > 1:
                 if tail[0] == head[0]:
                     tail[1] += 1 if head[1] > tail[1] else -1
                 elif tail[1] == head[1]:

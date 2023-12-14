@@ -17,14 +17,14 @@ def solve(data):  # solves the question
     lines = []
     for report in data:
         md = get_md(report[0], report[1], report[2], report[3]) + 1
-        points = [[report[0], report[1]+md], [report[0]+md, report[1]],
-                  [report[0], report[1]-md], [report[0]-md, report[1]]]
+        points = [[report[0], report[1] + md], [report[0] + md, report[1]],
+                  [report[0], report[1] - md], [report[0] - md, report[1]]]
         for i in range(3, -1, -1):
-            lines.append([points[i], points[i-1]])
+            lines.append([points[i], points[i - 1]])
 
-    for i in range(len(lines)-4):
-        for j in range(i+1, len(lines), 2):
-            if j-i != j % 4:
+    for i in range(len(lines) - 4):
+        for j in range(i + 1, len(lines), 2):
+            if j - i != j % 4:
                 x1 = lines[i][0][0]
                 y1 = lines[i][0][1]
                 x2 = lines[i][1][0]

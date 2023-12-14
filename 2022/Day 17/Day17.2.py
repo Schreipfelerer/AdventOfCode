@@ -28,22 +28,22 @@ def solve(data):  # solves the question
                 break
 
         x = 2
-        y = len(piece)+2+highest
+        y = len(piece) + 2 + highest
 
         while len(grid) <= y:
             grid.append("       ")
 
-        if i % (len(data)*5) == 0 and i != 0 and not did_skip:
-            hight_difs.append(highest-sum(hight_difs))
-            tops.append("".join(grid[highest-41:highest-1]))
+        if i % (len(data) * 5) == 0 and i != 0 and not did_skip:
+            hight_difs.append(highest - sum(hight_difs))
+            tops.append("".join(grid[highest - 41:highest - 1]))
 
             if len(tops) > 1:
-                for j in range(len(tops)-1):
+                for j in range(len(tops) - 1):
                     if tops[j] == tops[-1]:
                         did_skip = True
-                        segments = (len(tops)-j-1)*5*len(data)  # Anzahl Stücke im Cycle
+                        segments = (len(tops) - j - 1) * 5 * len(data)  # Anzahl Stücke im Cycle
                         cycle_fill = (1_000_000_000_000 - i) // segments  # Anzahl an Cycles zu überspringen
-                        hight_off = sum(hight_difs[j+1:]) * cycle_fill
+                        hight_off = sum(hight_difs[j + 1:]) * cycle_fill
                         i += segments * cycle_fill
 
         is_falling = True
@@ -63,10 +63,10 @@ def solve(data):  # solves the question
                         check_points.append([x - 1 + len(row) - len(row.lstrip(".")), y - j])
             else:
                 if i % len(pieces) == 1:
-                    check_points = [[x, y-2], [x+1, y-3], [x+2, y-2]]
+                    check_points = [[x, y - 2], [x + 1, y - 3], [x + 2, y - 2]]
                 else:
                     for j in range(len(piece[-1])):
-                        check_points.append([x+j, y-len(piece)])
+                        check_points.append([x + j, y - len(piece)])
 
             is_clear = True
             for p in check_points:
@@ -87,7 +87,7 @@ def solve(data):  # solves the question
                 for y_off, row in enumerate(piece):
                     for x_off, p in enumerate(row):
                         if p == "#":
-                            grid[y-y_off] = grid[y-y_off][:x+x_off] + "#" + grid[y-y_off][x+x_off+1:]
+                            grid[y - y_off] = grid[y - y_off][:x + x_off] + "#" + grid[y - y_off][x + x_off + 1:]
 
             do_push = not do_push
 

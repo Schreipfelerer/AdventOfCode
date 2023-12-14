@@ -10,9 +10,8 @@ while True:
     x += 3
     y += 1
     try:
-        if (c[y][x % (len(c[y])-1)]) == "#":
+        if (c[y][x % (len(c[y]) - 1)]) == "#":
             num += 1
     except IndexError:
         print(num)
         break
-

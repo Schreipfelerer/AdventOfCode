@@ -96,7 +96,7 @@ def solve(data):  # solves the question
 
         turn += 1
 
-    return turn+1
+    return turn + 1
 
 
 def main():

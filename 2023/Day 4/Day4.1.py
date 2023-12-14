@@ -11,8 +11,8 @@ def parseInput(lines):  # parses the input to the desired typ
     data = []
     for line in lines:
         line = line.rstrip("\n").split(": ")[1].split(" | ")
-        datapoint = [[],[]]
-        for i in [0,1]:
+        datapoint = [[], []]
+        for i in [0, 1]:
             for lit in line[i].split(" "):
                 if lit:
                     datapoint[i].append(int(lit))
@@ -25,7 +25,7 @@ def solve(data):  # solves the question
     for datapoint in data:
         length = len(set(datapoint[0]) & set(datapoint[1]))
         if length:
-            sol += 2**(length-1)
+            sol += 2 ** (length - 1)
     return sol
 
 

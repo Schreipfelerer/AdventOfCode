@@ -42,7 +42,7 @@ def solve(data):  # solves the question
                         points += 4
                 scores.append(points)
     scores.sort()
-    return scores[int((len(scores)-1)/2)]
+    return scores[int((len(scores) - 1) / 2)]
 
 
 def main():

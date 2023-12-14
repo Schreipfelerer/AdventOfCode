@@ -4,7 +4,6 @@ all_food = []
 allergen_dict = {}
 num_foods = len(filelines)
 
-
 for foods in filelines:
     food = foods.split("(")[0].rstrip().split(" ")  # List with all the ingriediants
     allergens = "".join(foods.split("(")[1].split(" ")[1:]).rstrip(")").split(",")  # List with all the allergens

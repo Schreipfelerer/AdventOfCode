@@ -11,5 +11,4 @@ for line in lines:
             total_fuel += fuel
             fuel = int(fuel / 3) - 2
 
-
 print(total_fuel)

@@ -35,8 +35,8 @@ def solve(data):  # solves the question
 
     for move in moves:
         for _ in range(move[0]):
-            if stacks[move[1]-1]:
-                stacks[move[2]-1].append(stacks[move[1]-1].pop())
+            if stacks[move[1] - 1]:
+                stacks[move[2] - 1].append(stacks[move[1] - 1].pop())
             else:
                 break
 

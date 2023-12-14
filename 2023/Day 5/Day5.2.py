@@ -9,7 +9,7 @@ def readInput(use_example=False) -> list:  # Reads the Input cas be set to read 
 
 def parseInput(lines):  # parses the input to the desired typ
     seeds = lines[0].rstrip("\n").lstrip("seeds: ").split(" ")
-    data = [[(int(seeds[i]), int(seeds[i+1])) for i in range(0, len(seeds), 2)]]
+    data = [[(int(seeds[i]), int(seeds[i + 1])) for i in range(0, len(seeds), 2)]]
     range_map = []
     for line in lines[2:]:
 
@@ -35,16 +35,16 @@ def solve(data):  # solves the question
                 seed = seeds[i]
                 if seed is int or row is int:
                     print("lol")
-                if (row[1] < (seed[0]+seed[1])) and ((row[1]+row[2]) > seed[0]):
-                    overlap = min(seed[0]+seed[1], row[1]+row[2])-max(row[1], seed[0])
-                    converted_seeds.append((max(row[1], seed[0])-row[1]+row[0],overlap))
+                if (row[1] < (seed[0] + seed[1])) and ((row[1] + row[2]) > seed[0]):
+                    overlap = min(seed[0] + seed[1], row[1] + row[2]) - max(row[1], seed[0])
+                    converted_seeds.append((max(row[1], seed[0]) - row[1] + row[0], overlap))
                     if row[1] > seed[0]:
-                        seeds.append((seed[0], row[1]-seed[0]))
-                    if row[1]+row[2] < seed[0]+seed[1]:
-                        seeds.append((row[1]+row[2], seed[0]+seed[1]-(row[1]+row[2])))
+                        seeds.append((seed[0], row[1] - seed[0]))
+                    if row[1] + row[2] < seed[0] + seed[1]:
+                        seeds.append((row[1] + row[2], seed[0] + seed[1] - (row[1] + row[2])))
                     seeds.remove(seed)
                 else:
-                    i+=1
+                    i += 1
         seeds = converted_seeds + seeds
     return min(seeds, key=lambda x: x[0])[0]
 

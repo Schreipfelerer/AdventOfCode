@@ -2,7 +2,6 @@ import copy
 
 filelines = open("input.txt").read().split("\n")
 
-
 hexgrid = []
 for x in range(400):
     line = []
@@ -48,7 +47,7 @@ for i in range(100):
         for y in range(x % 2, 400):
             num = 0
             for offset in offsets:
-                if 0 <= x+offset[0] < 400:
+                if 0 <= x + offset[0] < 400:
                     if 0 <= y + offset[1] < 400:
                         if old_grid[x + offset[0]][y + offset[1]]:
                             num += 1

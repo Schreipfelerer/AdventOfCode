@@ -24,7 +24,7 @@ def playRound(cards1, cards2):
             previousRounds.append([cards1[:], cards2[:]])
 
         if cards1[0] < len(cards1) and cards2[0] < len(cards2):
-            winner = playRound(cards1[1:cards1[0]+1], cards2[1:cards2[0]+1])
+            winner = playRound(cards1[1:cards1[0] + 1], cards2[1:cards2[0] + 1])
         elif cards1[0] > cards2[0]:
             winner = "P1"
         else:
@@ -47,6 +47,6 @@ def playRound(cards1, cards2):
 playRound(Player1cards, Player2cards)
 winningCards = Player1cards + Player2cards
 win = 0
-for i in range(1, len(winningCards)+1):
-    win += i*winningCards[len(winningCards)-i]
+for i in range(1, len(winningCards) + 1):
+    win += i * winningCards[len(winningCards) - i]
 print(win)

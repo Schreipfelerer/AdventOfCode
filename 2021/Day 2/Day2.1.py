@@ -26,7 +26,7 @@ def solve(data: List[Tuple[str, int]]):  # solves the question
             pos[1] += movement[1]
         if movement[0] == "up":
             pos[1] -= movement[1]
-    return pos[0]*pos[1]
+    return pos[0] * pos[1]
 
 
 def main():

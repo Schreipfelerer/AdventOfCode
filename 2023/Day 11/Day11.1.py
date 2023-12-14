@@ -31,8 +31,8 @@ def solve(data):  # solves the question
 
     solution = 0
     for i, galax_a in enumerate(galaxies):
-        for galax_b in galaxies[i+1:]:
-            distance = abs(galax_a[0]-galax_b[0])+abs(galax_a[1]-galax_b[1])
+        for galax_b in galaxies[i + 1:]:
+            distance = abs(galax_a[0] - galax_b[0]) + abs(galax_a[1] - galax_b[1])
             for y in range(min(galax_a[0], galax_b[0]), max(galax_a[0], galax_b[0])):
                 if y in empty_row:
                     distance += 1

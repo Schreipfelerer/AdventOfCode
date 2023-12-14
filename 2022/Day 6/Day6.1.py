@@ -10,7 +10,7 @@ def parseInput(lines):  # parses the input to the desired typ
 
 def solve(data):  # solves the question
     for i, c in enumerate(data):
-        if len(set(data[max(0, i-4):i])) == 4:
+        if len(set(data[max(0, i - 4):i])) == 4:
             return i
 
 

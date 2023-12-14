@@ -5,13 +5,13 @@ size = 30
 cube = [[[False for x in range(size)] for y in range(size)] for z in range(size)]
 
 with open("input.txt") as f:
-    x = size//2
+    x = size // 2
     for line in f.readlines():
-        y = size//2
+        y = size // 2
         for char in line:
             if char != "\n":
                 if char == "#":
-                    cube[x][y][size//2] = True
+                    cube[x][y][size // 2] = True
                 y += 1
         x += 1
 
@@ -27,11 +27,11 @@ for i in range(6):
                         for z_off in range(-1, 2):
 
                             if 0 <= x + x_off < len(cube_copy):
-                                if 0 <= y + y_off < len(cube_copy[x+x_off]):
-                                    if 0 <= z + z_off < len(cube_copy[x+x_off][y+y_off]):
+                                if 0 <= y + y_off < len(cube_copy[x + x_off]):
+                                    if 0 <= z + z_off < len(cube_copy[x + x_off][y + y_off]):
                                         if x_off != 0 or y_off != 0 or z_off != 0:
 
-                                            if cube_copy[x+x_off][y+y_off][z+z_off]:
+                                            if cube_copy[x + x_off][y + y_off][z + z_off]:
                                                 active_n += 1
 
                 if cube_copy[x][y][z]:

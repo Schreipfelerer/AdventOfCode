@@ -20,38 +20,39 @@ def solve(data):  # solves the question
     minute = 0
 
     posi = {(0, 1)}
-    while (hight-1, width-2) not in posi:
+    while (hight - 1, width - 2) not in posi:
         minute += 1
         for p in up:
             p[0] -= 1
             if p[0] == 0:
-                p[0] = hight-2
+                p[0] = hight - 2
         for p in down:
             p[0] += 1
-            if p[0] == hight-1:
+            if p[0] == hight - 1:
                 p[0] = 1
         for p in right:
             p[1] += 1
-            if p[1] == width-1:
+            if p[1] == width - 1:
                 p[1] = 1
         for p in left:
             p[1] -= 1
             if p[1] == 0:
-                p[1] = width-2
+                p[1] = width - 2
 
-        bliz = up+down+right+left
+        bliz = up + down + right + left
         new_pos = set()
         for p in posi:
             for offset in ((1, 0), (-1, 0), (0, 1), (0, -1), (0, 0)):
                 x = p[0] + offset[0]
                 y = p[1] + offset[1]
-                if (0 < x < hight-1 and 0 < y < width-1) or (x == 0 and y == 1) or (x == hight-1 and y == width-2):
+                if (0 < x < hight - 1 and 0 < y < width - 1) or (x == 0 and y == 1) or (
+                        x == hight - 1 and y == width - 2):
                     if [x, y] not in bliz:
                         new_pos.add((x, y))
 
         posi = new_pos
 
-    posi = {(hight-1, width-2)}
+    posi = {(hight - 1, width - 2)}
     while (0, 1) not in posi:
         minute += 1
         for p in up:

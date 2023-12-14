@@ -5,7 +5,7 @@ def readInput(use_example=False) -> list:  # Reads the Input cas be set to read 
 
 
 def parseInput(lines):  # parses the input to the desired typ
-    data = [[int(line)*811589153, i] for i, line in enumerate(lines)]
+    data = [[int(line) * 811589153, i] for i, line in enumerate(lines)]
     return data
 
 

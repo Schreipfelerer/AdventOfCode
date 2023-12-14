@@ -12,8 +12,8 @@ def parseInput(lines):  # parses the input to the desired typ
     for line in lines:
         number = int(line.lstrip("Card ").split(":")[0])
         line = line.rstrip("\n").split(": ")[1].split(" | ")
-        datapoint = [[],[], number, 1]
-        for i in [0,1]:
+        datapoint = [[], [], number, 1]
+        for i in [0, 1]:
             for lit in line[i].split(" "):
                 if lit:
                     datapoint[i].append(int(lit))
@@ -25,9 +25,9 @@ def solve(data):  # solves the question
     for datapoint in data:
         winners = len(set(datapoint[0]) & set(datapoint[1]))
         if winners:
-            for i in range(datapoint[2], datapoint[2]+winners):
+            for i in range(datapoint[2], datapoint[2] + winners):
                 data[i][3] += datapoint[3]
-    return sum(map(lambda datapointy : datapointy[3], data))
+    return sum(map(lambda datapointy: datapointy[3], data))
 
 
 def main():

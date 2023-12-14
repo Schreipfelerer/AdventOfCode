@@ -15,7 +15,8 @@ def parseInput(lines):  # parses the input to the desired typ
         for segment in line.split(","):
             segment = segment.lstrip("xyz=")
             region.append((int((segment.split("..")[0])), int((segment.split("..")[1]))))
-        if region[1][0] < -50 or region[1][1] > 50 or region[2][0] < -50 or region[2][1] > 50 or region[3][0] < -50 or region[3][1] > 50:
+        if region[1][0] < -50 or region[1][1] > 50 or region[2][0] < -50 or region[2][1] > 50 or region[3][0] < -50 or \
+                region[3][1] > 50:
             pass
         else:
             data.append(region)
@@ -61,13 +62,13 @@ def sub(cube_list, cube):
 
 def intersects(cube1, cube2):
     return (cube2[0][0] <= cube1[0][1] and cube2[0][1] >= cube1[0][0]) and \
-           (cube2[1][0] <= cube1[1][1] and cube2[1][1] >= cube1[1][0]) and \
-           (cube2[2][0] <= cube1[2][1] and cube2[2][1] >= cube1[2][0])
+        (cube2[1][0] <= cube1[1][1] and cube2[1][1] >= cube1[1][0]) and \
+        (cube2[2][0] <= cube1[2][1] and cube2[2][1] >= cube1[2][0])
 
 
 def is_inside(cube1, cube2):
     return cube2[0][0] <= cube1[0][0] and cube2[0][1] >= cube1[0][1] and cube2[1][0] <= cube1[1][0] and \
-           cube2[1][1] >= cube1[1][1] and cube2[2][0] <= cube1[2][0] and cube2[2][1] >= cube1[2][1]
+        cube2[1][1] >= cube1[1][1] and cube2[2][0] <= cube1[2][0] and cube2[2][1] >= cube1[2][1]
 
 
 def newCubes(cube_to_div, cube):
@@ -75,21 +76,21 @@ def newCubes(cube_to_div, cube):
     y_sec = []
     z_sec = []
     if cube_to_div[0][0] < cube[0][0]:
-        x_sec.append((cube_to_div[0][0], cube[0][0]-1))
+        x_sec.append((cube_to_div[0][0], cube[0][0] - 1))
     if cube_to_div[0][1] > cube[0][1]:
-        x_sec.append((cube[0][1]+1, cube_to_div[0][1]))
+        x_sec.append((cube[0][1] + 1, cube_to_div[0][1]))
     x_sec.append((max(cube_to_div[0][0], cube[0][0]), min(cube_to_div[0][1], cube[0][1])))
 
     if cube_to_div[1][0] < cube[1][0]:
-        y_sec.append((cube_to_div[1][0], cube[1][0]-1))
+        y_sec.append((cube_to_div[1][0], cube[1][0] - 1))
     if cube_to_div[1][1] > cube[1][1]:
-        y_sec.append((cube[1][1]+1, cube_to_div[1][1]))
+        y_sec.append((cube[1][1] + 1, cube_to_div[1][1]))
     y_sec.append((max(cube_to_div[1][0], cube[1][0]), min(cube_to_div[1][1], cube[1][1])))
 
     if cube_to_div[2][0] < cube[2][0]:
-        z_sec.append((cube_to_div[2][0], cube[2][0]-1))
+        z_sec.append((cube_to_div[2][0], cube[2][0] - 1))
     if cube_to_div[2][1] > cube[2][1]:
-        z_sec.append((cube[2][1]+1, cube_to_div[2][1]))
+        z_sec.append((cube[2][1] + 1, cube_to_div[2][1]))
     z_sec.append((max(cube_to_div[2][0], cube[2][0]), min(cube_to_div[2][1], cube[2][1])))
 
     return [(x, y, z) for x in x_sec for y in y_sec for z in z_sec]

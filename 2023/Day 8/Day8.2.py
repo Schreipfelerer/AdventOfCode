@@ -20,7 +20,7 @@ def solve(data):  # solves the question
     instruction_length = len(data[0])
     visited_at_start = [[] for _ in pos]
     while any(not x.endswith("Z") for x in pos):
-        if not steps%instruction_length:
+        if not steps % instruction_length:
             if all([pos_i in visited_at_start[i] for i, pos_i in enumerate(pos)]):
                 print([len(pos_i) for pos_i in visited_at_start])
                 print(visited_at_start)
@@ -31,10 +31,9 @@ def solve(data):  # solves the question
                         pass
                     else:
                         visited_at_start[i].append(pos_i)
-        direction = 0 if data[0][steps%instruction_length] == "L" else 1
+        direction = 0 if data[0][steps % instruction_length] == "L" else 1
         pos = [data[1][x][direction] for x in pos]
-        steps +=1
-
+        steps += 1
 
     return steps
 

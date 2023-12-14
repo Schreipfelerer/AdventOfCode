@@ -10,9 +10,9 @@ for line in file[:index]:
     allowed_numbers = line.split(":")[1].lstrip(" ")
     rules.append([name, allowed_numbers.split(" or ")[0], allowed_numbers.split(" or ")[1]])
 
-myTicket = file[index+2].split(",")
+myTicket = file[index + 2].split(",")
 
-for ticket_line in file[index+5:]:
+for ticket_line in file[index + 5:]:
     nearbytickets.append(ticket_line.split(","))
 
 for ticket in nearbytickets:

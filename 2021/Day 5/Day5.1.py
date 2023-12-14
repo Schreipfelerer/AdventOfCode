@@ -37,8 +37,8 @@ def solve(data):  # solves the question
                 x1, x2 = x2, x1
             if y2 < y1:
                 y1, y2 = y2, y1
-            for x in range(x1, x2+1):
-                for y in range(y1, y2+1):
+            for x in range(x1, x2 + 1):
+                for y in range(y1, y2 + 1):
                     vents[x][y] += 1
 
     counter = 0

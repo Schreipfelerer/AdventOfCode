@@ -17,7 +17,7 @@ def solve(data):  # solves the question
                 c = "-1"
             if c == "=":
                 c = "-2"
-            snafu_dec += (5**power) * int(c)
+            snafu_dec += (5 ** power) * int(c)
             power += 1
 
     digits = []
@@ -27,10 +27,10 @@ def solve(data):  # solves the question
 
     for i, d in enumerate(digits):
         if d > 2:
-            digits[i] = d-5
-            if i+1 == len(digits):
+            digits[i] = d - 5
+            if i + 1 == len(digits):
                 digits.append(0)
-            digits[i+1] += 1
+            digits[i + 1] += 1
 
     return "".join([str(i) for i in digits[::-1]]).replace("-2", "=").replace("-1", "-")
 

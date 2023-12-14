@@ -2,7 +2,7 @@ import copy
 
 size_input = 8
 generations = 6
-size = generations+(size_input*2)+3
+size = generations + (size_input * 2) + 3
 
 cube = [[[[False for x in range(size)] for y in range(size)] for z in range(size)] for w in range(size)]
 
@@ -18,7 +18,7 @@ with open("input.txt") as f:
         x += 1
 
 for i in range(6):
-    print("Generation " + str(i+1))
+    print("Generation " + str(i + 1))
     cube_copy = copy.deepcopy(cube)
     for x in range(len(cube_copy)):
         for y in range(len(cube_copy[x])):
@@ -37,7 +37,7 @@ for i in range(6):
                                                 if 0 <= w + w_off < size:
                                                     if x_off != 0 or y_off != 0 or z_off != 0 or w_off != 0:
 
-                                                        if cube_copy[x+x_off][y+y_off][z+z_off][w+w_off]:
+                                                        if cube_copy[x + x_off][y + y_off][z + z_off][w + w_off]:
                                                             active_n += 1
 
                     if cube_copy[x][y][z][w]:

@@ -45,7 +45,7 @@ def decode(b):
             length = int(binary[:15], 2)
             binary = binary[15:]
             original = binary
-            while len(original)-len(binary) < length:
+            while len(original) - len(binary) < length:
                 ret = decode(binary)
                 version_sum += ret[0]
                 binary = ret[1]

@@ -25,24 +25,24 @@ def solve(data):  # solves the question
     solution = 0
     for pattern in data:
         for i, row in enumerate(pattern[:-1]):
-            if pattern[i] == pattern[i+1]:
+            if pattern[i] == pattern[i + 1]:
                 offset = 1
                 is_true_reflection = True
-                while i-offset >= 0 and i+offset+1 < len(pattern) and is_true_reflection:
-                    is_true_reflection = pattern[i-offset] == pattern[i+offset+1]
+                while i - offset >= 0 and i + offset + 1 < len(pattern) and is_true_reflection:
+                    is_true_reflection = pattern[i - offset] == pattern[i + offset + 1]
                     offset += 1
                 if is_true_reflection:
-                    solution += (i+1)*100
+                    solution += (i + 1) * 100
 
-        for i in range(len(pattern[0])-1):
-            if [x[i] for x in pattern] == [x[i+1] for x in pattern]:
+        for i in range(len(pattern[0]) - 1):
+            if [x[i] for x in pattern] == [x[i + 1] for x in pattern]:
                 offset = 1
                 is_true_reflection = True
-                while i-offset >= 0 and i+offset+1 < len(pattern[0]) and is_true_reflection:
-                    is_true_reflection = [x[i-offset] for x in pattern] == [x[i+offset+1] for x in pattern]
+                while i - offset >= 0 and i + offset + 1 < len(pattern[0]) and is_true_reflection:
+                    is_true_reflection = [x[i - offset] for x in pattern] == [x[i + offset + 1] for x in pattern]
                     offset += 1
                 if is_true_reflection:
-                    solution += (i+1)
+                    solution += (i + 1)
     return solution
 
 

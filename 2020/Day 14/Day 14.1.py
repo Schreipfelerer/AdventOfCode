@@ -12,14 +12,14 @@ for instruction in f:
     if operation.startswith("mem"):
         index = operation[4:-1]
         value_bin = bin(int(value))[2:]
-        unmasked_value_bin = (36-len(value_bin))*"0" + value_bin
+        unmasked_value_bin = (36 - len(value_bin)) * "0" + value_bin
         masked_value_bin = ""
         for i in range(36):
             if mask[i] != "X":
                 masked_value_bin += mask[i]
             else:
                 masked_value_bin += unmasked_value_bin[i]
-        masked_value = int("0b"+masked_value_bin, 2)
+        masked_value = int("0b" + masked_value_bin, 2)
         mem[index] = masked_value
 
 print(mem)

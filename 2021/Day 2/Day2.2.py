@@ -23,12 +23,12 @@ def solve(data: List[Tuple[str, int]]):  # solves the question
     for movement in data:
         if movement[0] == "forward":
             pos[0] += movement[1]
-            pos[1] += movement[1]*aim
+            pos[1] += movement[1] * aim
         if movement[0] == "down":
             aim += movement[1]
         if movement[0] == "up":
             aim -= movement[1]
-    return pos[0]*pos[1]
+    return pos[0] * pos[1]
 
 
 def main():

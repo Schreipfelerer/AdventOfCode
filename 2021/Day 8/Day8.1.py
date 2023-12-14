@@ -23,7 +23,7 @@ def solve(data):  # solves the question
     num = 0
     for line in data:
         for digit in line[1]:
-            if len(digit) in [2,3,4,7]:
+            if len(digit) in [2, 3, 4, 7]:
                 num += 1
 
     return num

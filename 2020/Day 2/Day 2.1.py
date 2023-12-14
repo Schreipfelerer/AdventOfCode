@@ -11,5 +11,4 @@ with open("input.txt") as file:
         except IndexError:
             pass
 
-
 print(num)

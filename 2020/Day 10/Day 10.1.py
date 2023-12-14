@@ -6,7 +6,7 @@ with open("input.txt") as file:
 num = [0, 0, 0]
 c.sort()
 for i in range(len(c)):
-    dif = c[i] if i == 0 else c[i]-c[i - 1]
+    dif = c[i] if i == 0 else c[i] - c[i - 1]
     num[dif - 1] += 1
 
-print(num[0]*(num[2]+1))
+print(num[0] * (num[2] + 1))

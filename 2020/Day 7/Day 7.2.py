@@ -34,4 +34,4 @@ def does_contains(bag):
     print("None found")
 
 
-print(does_contains("shiny gold")-1)
+print(does_contains("shiny gold") - 1)

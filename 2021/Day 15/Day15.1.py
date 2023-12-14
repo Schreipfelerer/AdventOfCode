@@ -24,7 +24,7 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     cost = []
     for i in range(len(data)):
-        cost.append([9999]*len(data[0]))
+        cost.append([9999] * len(data[0]))
     cost[0][0] = 0
 
     stack = deque()

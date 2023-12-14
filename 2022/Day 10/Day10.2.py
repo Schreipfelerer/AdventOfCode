@@ -31,7 +31,7 @@ def solve(data):  # solves the question
         else:
             wait = False
 
-        printstr += "#" if 1 >= reg - (cycle-1) % 40 >= -1 else "."
+        printstr += "#" if 1 >= reg - (cycle - 1) % 40 >= -1 else "."
 
         if cycle % 40 == 0:
             printstr += "\n"

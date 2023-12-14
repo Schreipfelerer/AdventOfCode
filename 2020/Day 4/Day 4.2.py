@@ -3,7 +3,6 @@ with open("input.txt") as file:
     for line in file:
         c.append(line.rstrip("\n"))
 
-
 dic = {}
 col = []
 for each in c:
@@ -15,7 +14,6 @@ for each in c:
             point = data.split(":")
             dic[point[0]] = point[1]
 col.append(dic)
-
 
 valid = 0
 
@@ -33,9 +31,11 @@ def check_valid(p):
         if not len(passport["hcl"]) == 7:
             return False
         for char in passport["hcl"][1:]:
-            if not (char == "a" or char == "b" or char == "c" or char == "d" or char == "e" or char == "f" or char == "0" or char == "1" or char == "2" or char == "3" or char == "4" or char == "5" or char == "6" or char == "7" or char == "8" or char == "9"):
+            if not (
+                    char == "a" or char == "b" or char == "c" or char == "d" or char == "e" or char == "f" or char == "0" or char == "1" or char == "2" or char == "3" or char == "4" or char == "5" or char == "6" or char == "7" or char == "8" or char == "9"):
                 return False
-        if not (passport["ecl"] == "amb" or passport["ecl"] == "blu" or passport["ecl"] == "brn" or passport["ecl"] == "gry" or passport["ecl"] == "grn" or passport["ecl"] == "hzl" or passport["ecl"] == "oth"):
+        if not (passport["ecl"] == "amb" or passport["ecl"] == "blu" or passport["ecl"] == "brn" or passport[
+            "ecl"] == "gry" or passport["ecl"] == "grn" or passport["ecl"] == "hzl" or passport["ecl"] == "oth"):
             return False
         if not len(passport["pid"]) == 9:
             return False
@@ -56,6 +56,5 @@ def check_valid(p):
 for passport in col:
     if check_valid(passport):
         valid += 1
-
 
 print(valid)

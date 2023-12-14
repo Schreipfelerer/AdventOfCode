@@ -13,11 +13,11 @@ def parseInput(lines):  # parses the input to the desired typ
     lines = lines[2:]
     data = []
     for i in range(offset):
-        data.append("."*(len(lines[0]) + (offset*2)))
+        data.append("." * (len(lines[0]) + (offset * 2)))
     for line in lines:
-        data.append("."*offset + line.rstrip("\n") + "."*offset)
+        data.append("." * offset + line.rstrip("\n") + "." * offset)
     for i in range(offset):
-        data.append("." * (len(lines[0]) + (offset*2)))
+        data.append("." * (len(lines[0]) + (offset * 2)))
     return ieas, data
 
 
@@ -31,7 +31,7 @@ def solve(data):  # solves the question
                 binary_s = ""
                 for x_off in range(-1, 2):
                     for y_off in range(-1, 2):
-                        if 0 <= x+x_off < len(data) and 0 <= y+y_off < len(data[x+x_off]):
+                        if 0 <= x + x_off < len(data) and 0 <= y + y_off < len(data[x + x_off]):
                             binary_s = binary_s + data[x + x_off][y + y_off]
                         else:
                             if ieas[0] == "." or times % 2 == 0:

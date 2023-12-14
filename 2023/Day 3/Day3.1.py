@@ -13,12 +13,12 @@ def parseInput(lines):  # parses the input to the desired typ
     for i, line in enumerate(lines):
         for y, char in enumerate(line.rstrip("\n")):
             if char in "0123456789":
-                if y == 0 or line[y-1] not in "0123456789":
+                if y == 0 or line[y - 1] not in "0123456789":
                     number = ""
                     while line[y] in "0123456789":
                         number += line[y]
                         y += 1
-                    partnums.append((number, i, y-len(number)))
+                    partnums.append((number, i, y - len(number)))
             elif char != ".":
                 parts.append((i, y))
     return parts, partnums
@@ -29,8 +29,8 @@ def solve(data):  # solves the question#
     sol = 0
     for partnum in partnums:
         is_neighbour = False
-        for y in range(partnum[1]-1, partnum[1]+2):
-            for x in range(partnum[2]-1, partnum[2]+1+len(partnum[0])):
+        for y in range(partnum[1] - 1, partnum[1] + 2):
+            for x in range(partnum[2] - 1, partnum[2] + 1 + len(partnum[0])):
                 if (y, x) in parts:
                     is_neighbour = True
         if is_neighbour:

@@ -6,7 +6,7 @@ with open("input.txt") as file:
             bol = False
             for i in c[-26:-1]:
                 for j in c[-26:-1]:
-                    if j+i == int(line):
+                    if j + i == int(line):
                         bol = True
             if not bol:
                 print(int(line))

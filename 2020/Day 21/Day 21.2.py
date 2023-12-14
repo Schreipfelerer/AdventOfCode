@@ -1,7 +1,6 @@
 filelines = open("input.txt").read().split("\n")
 allergen_dict = {}
 
-
 for foods in filelines:
     food = foods.split("(")[0].rstrip().split(" ")  # List with all the ingriediants
     allergens = "".join(foods.split("(")[1].split(" ")[1:]).rstrip(")").split(",")  # List with all the allergens

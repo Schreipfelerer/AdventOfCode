@@ -11,7 +11,7 @@ def parseInput(lines):  # parses the input to the desired typ
         list_stack = []
         latest_pop = None
         for j in (0, 1):
-            for k, char in enumerate(lines[i+j]):
+            for k, char in enumerate(lines[i + j]):
                 if char == "[":
                     new_list = []
                     if list_stack:
@@ -20,11 +20,11 @@ def parseInput(lines):  # parses the input to the desired typ
                 elif char == "]":
                     latest_pop = list_stack.pop()
                 elif char != ",":
-                    if lines[i+j][k-1] == "[" or lines[i+j][k-1] == ",":
+                    if lines[i + j][k - 1] == "[" or lines[i + j][k - 1] == ",":
                         int_len = 1
-                        while lines[i+j][k+int_len] != "," and lines[i+j][k+int_len] != "]":
+                        while lines[i + j][k + int_len] != "," and lines[i + j][k + int_len] != "]":
                             int_len += 1
-                        list_stack[-1].append(int(lines[i+j][k:k+int_len]))
+                        list_stack[-1].append(int(lines[i + j][k:k + int_len]))
             battle[j] = latest_pop
         data.append(battle)
     return data

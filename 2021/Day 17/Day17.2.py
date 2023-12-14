@@ -24,8 +24,8 @@ def solve(data):  # solves the question
     max_y = abs(data[1][0]) + -1
     min_x = 0
     max_x = data[0][1]
-    for x in range(min_x, max_x+1):
-        for y in range(min_y, max_y+1):
+    for x in range(min_x, max_x + 1):
+        for y in range(min_y, max_y + 1):
             vel_x = x
             vel_y = y
             pos_y = 0
@@ -35,7 +35,7 @@ def solve(data):  # solves the question
                 pos_y += vel_y
                 if data[0][0] <= pos_x <= data[0][1] and data[1][0] <= pos_y <= data[1][1]:
                     difs += 1
-                    pos_x = data[0][1]+1
+                    pos_x = data[0][1] + 1
                 vel_y -= 1
                 if vel_x < 0:
                     vel_x += 1

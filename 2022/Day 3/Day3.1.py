@@ -11,10 +11,10 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     priority = 0
     for line in data:
-        part1 = line[:len(line)//2]
-        part2 = line[len(line)//2:]
+        part1 = line[:len(line) // 2]
+        part2 = line[len(line) // 2:]
         common = "".join(set(part1).intersection(part2))
-        priority += ord(common)-64+26 if common.isupper() else ord(common)-96
+        priority += ord(common) - 64 + 26 if common.isupper() else ord(common) - 96
     return priority
 
 

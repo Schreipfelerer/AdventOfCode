@@ -27,6 +27,6 @@ while len(Player1cards) != 0 and len(Player2cards) != 0:
 
 winningCards = Player1cards + Player2cards
 win = 0
-for i in range(1, len(winningCards)+1):
-    win += i*winningCards[len(winningCards)-i]
+for i in range(1, len(winningCards) + 1):
+    win += i * winningCards[len(winningCards) - i]
 print(win)

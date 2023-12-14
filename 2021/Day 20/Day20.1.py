@@ -13,8 +13,8 @@ def parseInput(lines):  # parses the input to the desired typ
     data = [("." * (len(lines[0]) + 3)), "." * (len(lines[0]) + 3)]
     for line in lines:
         data.append("." + "." + line.rstrip("\n") + "." + ".")
-    data.append(len(data[0])*".")
-    data.append(len(data[0])*".")
+    data.append(len(data[0]) * ".")
+    data.append(len(data[0]) * ".")
     return ieas, data
 
 
@@ -28,7 +28,7 @@ def solve(data):  # solves the question
                 binary_s = ""
                 for x_off in range(-1, 2):
                     for y_off in range(-1, 2):
-                        if 0 <= x+x_off < len(data) and 0 <= y+y_off < len(data[x]):
+                        if 0 <= x + x_off < len(data) and 0 <= y + y_off < len(data[x]):
                             binary_s = binary_s + data[x + x_off][y + y_off]
                         else:
                             if ieas[0] == "." or times % 2 == 0:
