@@ -12,6 +12,8 @@ def parseInput(lines):  # parses the input to the desired typ
     for line in lines:
         datapoint = line.rstrip("\n").split(" ")
         datapoint[1] = [int(x) for x in datapoint[1].split(",")]
+        datapoint[0] = datapoint[0]+"?"+datapoint[0]+"?"+datapoint[0]+"?"+datapoint[0]+"?"+datapoint[0]
+        datapoint[1] = datapoint[1][:]+datapoint[1][:]+datapoint[1][:]+datapoint[1][:]+datapoint[1][:]
         data.append(datapoint)
     return data
 
@@ -52,8 +54,9 @@ def getPossibilities(record):
 
 def solve(data):  # solves the question
     solution = 0
-    for record in data:
+    for i, record in enumerate(data):
         solution += getPossibilities(record)
+        print(f"Line {i}")
     return solution
 
 

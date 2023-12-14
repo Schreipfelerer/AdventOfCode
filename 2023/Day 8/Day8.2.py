@@ -17,10 +17,25 @@ def parseInput(lines):  # parses the input to the desired typ
 def solve(data):  # solves the question
     pos = [x for x in data[1] if x.endswith("A")]
     steps = 0
+    instruction_length = len(data[0])
+    visited_at_start = [[] for _ in pos]
     while any(not x.endswith("Z") for x in pos):
-        direction = 0 if data[0][steps%len(data[0])] == "L" else 1
+        if not steps%instruction_length:
+            if all([pos_i in visited_at_start[i] for i, pos_i in enumerate(pos)]):
+                print([len(pos_i) for pos_i in visited_at_start])
+                print(visited_at_start)
+            else:
+                for i, pos_i in enumerate(pos):
+                    if pos_i in visited_at_start[i]:
+                        # print(f"Loop in {i} after {steps//instruction_length} passes.")
+                        pass
+                    else:
+                        visited_at_start[i].append(pos_i)
+        direction = 0 if data[0][steps%instruction_length] == "L" else 1
         pos = [data[1][x][direction] for x in pos]
         steps +=1
+
+
     return steps
 
 
