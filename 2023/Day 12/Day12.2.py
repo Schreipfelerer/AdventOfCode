@@ -33,31 +33,31 @@ def splitPossibilities(record):
         else:
             return 0
 
+    springs = springs.lstrip(".").rstrip(".")
+
+
     if len(arrangement) == 1 and len(springs) == arrangement[0]:
         return 0 if "." in springs else 1
-
-    springs = springs.lstrip(".").rstrip(".")
 
     if len(springs) < sum(arrangement)+len(arrangement)-1:
         return 0
 
-    key = "X".join([str(x) for x in arrangement]) + springs
+    key = ",".join([str(x) for x in arrangement]) + springs
 
     if key in memom.keys():
         return memom[key]
 
     possib = 0
     biggest = max(arrangement)
+    length = len(springs)
 
-    for i in range(len(springs)-biggest+1):
+    for i in range(length-biggest+1):
         if "." not in springs[i:i+biggest]:
             if i == 0 or springs[i-1] != "#":
-                if i+biggest == len(springs) or springs[i+biggest] != "#":
-                    multi_possib = 1
-                    multi_possib *= splitPossibilities((springs[:max(0, i-1)], arrangement[:arrangement.index(biggest)]))
+                if i+biggest == length or springs[i+biggest] != "#":
+                    multi_possib = splitPossibilities((springs[:max(0, i-1)], arrangement[:arrangement.index(biggest)]))
                     if multi_possib:
-                        multi_possib *= splitPossibilities((springs[i+biggest+1:], arrangement[arrangement.index(biggest)+1:]))
-                        possib += multi_possib
+                        possib += multi_possib * splitPossibilities((springs[i+biggest+1:], arrangement[arrangement.index(biggest)+1:]))
 
     memom[key] = possib
     return possib
@@ -71,6 +71,7 @@ def solve(data):  # solves the question
         solution += sol
         # print(f"Line {i}: in {(time.time_ns()-old_time)/1000000:.2f} ms solution:{sol}")
         # old_time = time.time_ns()
+
     print(f"Solved in: {(time.time_ns() - old_time) / 1000000:.2f} ms")
     return solution
 
