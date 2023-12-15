@@ -1,5 +1,6 @@
 import time
 
+
 def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
     if use_example:
         with open('example.txt', 'r') as f:
@@ -20,37 +21,45 @@ def parseInput(lines):  # parses the input to the desired typ
     return data
 
 
-def getPossibilities(record):
+memom = {}
+
+
+def splitPossibilities(record):
     springs, arrangement = record
 
-    arrangement_cp = arrangement[:]
-    is_gap = True
-    i = 0
-    while i < len(springs) and springs[i] != "?":
-        if springs[i] == ".":
-            is_gap = True
+    if not arrangement:
+        if "#" not in springs:
+            return 1
         else:
-            if not arrangement_cp:
-                return 0
-            if is_gap:
-                if i + arrangement_cp[0] > len(springs):
-                    return 0
-                if "." in springs[i:i + arrangement_cp[0]]:
-                    return 0
-                else:
-                    i += arrangement_cp[0] - 1
-                    arrangement_cp = arrangement_cp[1:]
-                    is_gap = False
-            else:
-                return 0
-        i += 1
+            return 0
 
-    if "?" not in springs:
-        return 0 if arrangement_cp else 1
+    if len(arrangement) == 1 and len(springs) == arrangement[0]:
+        return 0 if "." in springs else 1
+
+    springs = springs.lstrip(".").rstrip(".")
+
+    if len(springs) < sum(arrangement)+len(arrangement)-1:
+        return 0
+
+    key = "X".join([str(x) for x in arrangement]) + springs
+
+    if key in memom.keys():
+        return memom[key]
+
     possib = 0
-    index = springs.index("?")
-    for replacement in ".#":
-        possib += getPossibilities((springs[:index] + replacement + springs[index + 1:], arrangement))
+    biggest = max(arrangement)
+
+    for i in range(len(springs)-biggest+1):
+        if "." not in springs[i:i+biggest]:
+            if i == 0 or springs[i-1] != "#":
+                if i+biggest == len(springs) or springs[i+biggest] != "#":
+                    multi_possib = 1
+                    multi_possib *= splitPossibilities((springs[:max(0, i-1)], arrangement[:arrangement.index(biggest)]))
+                    if multi_possib:
+                        multi_possib *= splitPossibilities((springs[i+biggest+1:], arrangement[arrangement.index(biggest)+1:]))
+                        possib += multi_possib
+
+    memom[key] = possib
     return possib
 
 
@@ -58,14 +67,16 @@ def solve(data):  # solves the question
     solution = 0
     old_time = time.time_ns()
     for i, record in enumerate(data):
-        solution += getPossibilities(record)
-        print(f"Line {i}: in {(time.time_ns()-old_time)/1000000:.2f} ms")
-        old_time = time.time_ns()
+        sol = splitPossibilities(record)
+        solution += sol
+        # print(f"Line {i}: in {(time.time_ns()-old_time)/1000000:.2f} ms solution:{sol}")
+        # old_time = time.time_ns()
+    print(f"Solved in: {(time.time_ns() - old_time) / 1000000:.2f} ms")
     return solution
 
 
 def main():
-    lines = readInput(True)
+    lines = readInput()
     data = parseInput(lines)
     print(solve(data))
 
