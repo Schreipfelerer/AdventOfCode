@@ -8,12 +8,19 @@ def readInput(use_example=False) -> list:  # Reads the Input cas be set to read 
 
 
 def parseInput(lines):  # parses the input to the desired typ
-    data = []
-    return data
+    return lines[0].rstrip("\n").split(",")
 
 
 def solve(data):  # solves the question
-    return None
+    hash_sum = 0
+    for string in data:
+        hash_value = 0
+        for char in string:
+            hash_value += ord(char)
+            hash_value *= 17
+            hash_value %= 256
+        hash_sum += hash_value
+    return hash_sum
 
 
 def main():
