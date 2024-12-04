@@ -8,16 +8,24 @@ def readInput(use_example=False) -> list:  # Reads the Input cas be set to read 
 
 
 def parseInput(lines):  # parses the input to the desired typ
-    data = []
-    return data
+    hail = []
+    for line in lines:
+        line = line[:-1]
+        if not line:
+            continue
+        line = line.replace(' @ ', ', ')
+        hail.append(list(map(int, line.split(", "))))
+    return hail
 
 
 def solve(data):  # solves the question
-    return None
+    test_min = 7
+    test_max = 27
+    return data
 
 
 def main():
-    lines = readInput()
+    lines = readInput(True)
     data = parseInput(lines)
     print(solve(data))
 
