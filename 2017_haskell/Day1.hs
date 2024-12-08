@@ -1,3 +1,4 @@
+#!/usr/bin/env runhaskell
 module Main where
 
 type Line = [Int]
@@ -13,14 +14,14 @@ loadFile fname = do
 parseLine :: String -> Maybe Line
 parseLine (i:is) = case parseLine is of 
     Nothing -> Nothing
-    Just rest -> Just $ (read [i]) : rest
+    Just rest -> Just $ read [i] : rest
 parseLine i = Just []
 
 solvePart1 :: [Line] -> String
-solvePart1 (x:_) = show $ sum $ zipWith (\y z -> if y == z then y else 0) (last x : init x) (x)
+solvePart1 (x:_) = show $ sum $ zipWith (\y z -> if y == z then y else 0) (last x : init x) x
 
 solvePart2 :: [Line] -> String
-solvePart2 (x:_) = show $ sum $ zipWith (\y z -> if y == z then y else 0) (rotateListFor (length x) x) (x)
+solvePart2 (x:_) = show $ sum $ zipWith (\y z -> if y == z then y else 0) (rotateListFor (length x) x) x
 
 rotateListFor :: Int -> [a] -> [a]
 rotateListFor 0 x = x

@@ -1,3 +1,4 @@
+#!/usr/bin/env runhaskell
 module Main where
 
 type Line = [Int]
@@ -13,7 +14,7 @@ loadFile fname = do
 parseLine :: String -> Maybe Line
 parseLine (i:is) = case parseLine is of 
     Nothing -> Nothing
-    Just rest -> Just $ (read [i]) : rest
+    Just rest -> Just $ read [i] : rest
 parseLine i = Just []
 
 solvePart1 :: [Line] -> String
