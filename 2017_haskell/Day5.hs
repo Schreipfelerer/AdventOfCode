@@ -18,18 +18,16 @@ parseLine (i:is) = case parseLine is of
 parseLine i = Just []
 
 solvePart1 :: [Line] -> String
-solvePart1 (x:_) = show $ sum $ map fst $ filter (uncurry (==)) $ zip (last x : init x) x
+solvePart1 _ = ""
 
 solvePart2 :: [Line] -> String
-solvePart2 (x:_) = show $ sum $ zipWith (\y z -> if y == z then y else 0) (rotateListFor (length x) x) x
+solvePart2 _ = ""
 
-rotateListFor :: Int -> [a] -> [a]
-rotateListFor 0 x = x
-rotateListFor i x = rotateListFor (i-2) (last x : init x)
 
 main :: IO ()
 main = do
-  lines <- loadFile "input1.txt"
+  lines <- loadFile "example.txt"
   putStrLn $ "Part 1: " ++ solvePart1 lines
   putStrLn $ "Part 2: " ++ solvePart2 lines
   return ()
+
