@@ -1,6 +1,9 @@
-def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
+def readInput(
+    *,
+    use_example=False,
+) -> list:  # Reads the Input cas be set to read from example.txt
     file_loc = "example.txt" if use_example else "input.txt"
-    with open(file_loc, 'r') as f:
+    with open(file_loc) as f:
         return f.read().split("\n")
 
 
@@ -38,8 +41,8 @@ def possibleValues(values: [int]):
     if len(values) < 2:
         return set(values)
     possibles = possibleValues(values[:-1])
-    possibles_added = set(map(lambda x: x + values[-1], possibles))
-    possibles_mul = set(map(lambda x: x * values[-1], possibles))
+    possibles_added = {x + values[-1] for x in possibles}
+    possibles_mul = {x * values[-1] for x in possibles}
     return possibles_added.union(possibles_mul)
 
 
@@ -47,9 +50,9 @@ def possibleValues2(values: [int]):
     if len(values) < 2:
         return set(values)
     possibles = possibleValues2(values[:-1])
-    possibles_added = set(map(lambda x: x + values[-1], possibles))
-    possibles_mul = set(map(lambda x: x * values[-1], possibles))
-    possibles_con = set(map(lambda x: int(str(x)+str(values[-1])), possibles))
+    possibles_added = {x + values[-1] for x in possibles}
+    possibles_mul = {x * values[-1] for x in possibles}
+    possibles_con = {int(str(x) + str(values[-1])) for x in possibles}
     return possibles_added.union(possibles_mul).union(possibles_con)
 
 
@@ -57,7 +60,7 @@ def main():
     lines = readInput()
     data = parseInput(lines)
     print(f"Part 1: {solvePart1(data)}")
-    print("")
+    print()
     print(f"Part 2: {solvePart2(data)}")
 
 

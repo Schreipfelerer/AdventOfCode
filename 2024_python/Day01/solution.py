@@ -1,6 +1,9 @@
-def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
+def readInput(
+    *,
+    use_example=False,
+) -> list:  # Reads the Input cas be set to read from example.txt
     file_loc = "example.txt" if use_example else "input.txt"
-    with open(file_loc, 'r') as f:
+    with open(file_loc) as f:
         return f.read().split("\n")
 
 
@@ -22,15 +25,16 @@ def solvePart1(data):  # solves the question
     data2.sort()
     data = zip(data1, data2)
     sum = 0
-    for (d1, d2) in data:
+    for d1, d2 in data:
         sum += abs(d1 - d2)
     return sum
+
 
 def solvePart2(data):  # solves the question
     data1, data2 = data
     sum = 0
     for d1 in data1:
-        sum += d1*data2.count(d1)
+        sum += d1 * data2.count(d1)
     return sum
 
 
@@ -38,7 +42,7 @@ def main():
     lines = readInput()
     data = parseInput(lines)
     print(f"Part 1: {solvePart1(data)}")
-    print("")
+    print()
     print(f"Part 2: {solvePart2(data)}")
 
 

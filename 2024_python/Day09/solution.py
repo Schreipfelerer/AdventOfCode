@@ -1,6 +1,9 @@
-def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
+def readInput(
+    *,
+    use_example=False,
+) -> list:  # Reads the Input cas be set to read from example.txt
     file_loc = "example.txt" if use_example else "input.txt"
-    with open(file_loc, 'r') as f:
+    with open(file_loc, "r") as f:
         return f.read().split("\n")
 
 
@@ -36,7 +39,7 @@ def solvePart1(line):  # solves the question
 
     solution = 0
     for i, c in enumerate(solve_list):
-        solution += i*c
+        solution += i * c
     return solution
 
 
@@ -64,11 +67,10 @@ def solvePart2(line: str):  # solves the question
             else:
                 streak = 0
             if streak == int(i):
-                solve_list[ind-streak+1:ind+1] = [cur_id] * streak
-                solve_list[old_ind:old_ind+streak] = [-1] * streak
+                solve_list[ind - streak + 1 : ind + 1] = [cur_id] * streak
+                solve_list[old_ind : old_ind + streak] = [-1] * streak
                 break
         cur_id -= 1
-
 
     solution = 0
     for i, c in enumerate(solve_list):
