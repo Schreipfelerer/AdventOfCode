@@ -23,7 +23,30 @@ solvePart1 x =
    in fst3 $ head $ filter (\(n, _, l) -> n `notElem` w && not (null l)) x
 
 solvePart2 :: [Line] -> String
-solvePart2 _ = ""
+solvePart2 x =
+  let root = solvePart1 x
+   in show $ balance x root (sumTree x root)
+
+balance :: [Line] -> String -> Int -> Int
+balance x h b =
+  let stuff = getStuff x h
+      sums = map (sumTree x) (snd stuff)
+   in if tail sums == init sums
+        then b - sum sums 
+        else balance x (snd stuff !! difInd sums) (sums!!fromEnum (0 == difInd sums)) 
+
+difInd :: [Int] -> Int 
+difInd (a:b:c:_) 
+ | a == b = 2
+ | otherwise = fromEnum $ a == c
+
+sumTree :: [Line] -> String -> Int
+sumTree x h =
+  let stuff = getStuff x h
+   in fst stuff + sum (map (sumTree x) (snd stuff))
+
+getStuff :: [Line] -> String -> (Int, [String])
+getStuff x h = (\(_, z1, z2) -> (z1, z2)) $ head $ filter (\y -> h == fst3 y) x
 
 main :: IO ()
 main = do
