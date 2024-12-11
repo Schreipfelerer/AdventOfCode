@@ -6,42 +6,42 @@ def readInput(use_example=False) -> list:  # Reads the Input cas be set to read 
 
 def parseInput(lines):  # parses the input to the desired typ
     data = list(map(int, lines[0].split(" ")))
-    return data
+    data_dict = {}
+    for d in data:
+        data_dict[d] = 1
+
+    return data_dict
 
 
 def solvePart1(data):  # solves the question
-    for _ in range(25):
-        new_data = []
-        for d in data:
+    return blink(data, 25)
+
+
+def solvePart2(data):
+    return blink(data, 75)
+
+
+def blink(data_dict, i):  # solves the question
+    for _ in range(i):
+        new_data = {}
+        for d in data_dict:
             str_d = str(d)
             if d == 0:
-                new_data.append(1)
+                dic_add(new_data, 1, data_dict[d])
             elif len(str_d) % 2 == 0:
-                new_data.append(int(str_d[:len(str_d) // 2]))
-                new_data.append(int(str_d[len(str_d) // 2:]))
+                dic_add(new_data, int(str_d[:len(str_d) // 2]), data_dict[d])
+                dic_add(new_data, int(str_d[len(str_d) // 2:]), data_dict[d])
             else:
-                new_data.append(d*2024)
-        data = new_data
-    return len(data)
+                dic_add(new_data, d * 2024, data_dict[d])
+        data_dict = new_data
+    return sum(data_dict.values())
 
 
-
-def solvePart2(data):  # solves the question
-    for _ in range(75):
-        print(_)
-        new_data = []
-        for d in data:
-            str_d = str(d)
-            if d == 0:
-                new_data.append(1)
-            elif len(str_d) % 2 == 0:
-                new_data.append(int(str_d[:len(str_d) // 2]))
-                new_data.append(int(str_d[len(str_d) // 2:]))
-            else:
-                new_data.append(d * 2024)
-        data = new_data
-    return len(data)
-
+def dic_add(dic, key, to_add):
+    if key in dic.keys():
+        dic[key] += to_add
+    else:
+        dic[key] = to_add
 
 
 def main():
