@@ -1,14 +1,17 @@
-def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
-    file_loc = "example3.txt" if use_example else "input.txt"
-    with open(file_loc, 'r') as f:
+def read_input(
+    *,
+    use_example=False,
+) -> list:  # Reads the Input cas be set to read from example.txt
+    file_loc = "example.txt" if use_example else "input.txt"
+    with open(file_loc) as f:
         return f.read().split("\n")
 
 
-def parseInput(lines):  # parses the input to the desired typ
+def parse_input(lines):  # parses the input to the desired typ
     return lines[:-1]
 
 
-def growPart(lines, x_start, y_start):
+def grow_part(lines, x_start, y_start):
     part = [(x_start, y_start)]
     char = lines[y_start][x_start]
     area = 1
@@ -33,30 +36,30 @@ def growPart(lines, x_start, y_start):
     return part, perimeter, area
 
 
-def solvePart1(data):  # solves the question
+def solve_part1(data):  # solves the question
     parts = []
     price = 0
     for y, line in enumerate(data):
         for x, char in enumerate(line):
             if all([(x, y) not in p for p in parts]):
-                part, perimeter, area = growPart(data, x, y)
+                part, perimeter, area = grow_part(data, x, y)
                 parts.append(part)
                 price += perimeter*area
     return price
 
 
 
-def solvePart2(data):  # solves the question
+def solve_part2(data):  # solves the question
     return len(data)
 
 
 
 def main():
-    lines = readInput(use_example=False)
-    data = parseInput(lines)
-    print(f"Part 1: {solvePart1(data)}")
-    print("")
-    print(f"Part 2: {solvePart2(data)}")
+    lines = read_input(use_example=True)
+    data = parse_input(lines)
+    print(f"Part 1: {solve_part1(data)}")
+    print()
+    print(f"Part 2: {solve_part2(data)}")
 
 
 if __name__ == "__main__":
