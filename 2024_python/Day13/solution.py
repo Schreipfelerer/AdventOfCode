@@ -46,10 +46,10 @@ def solve_part2(data):  # solves the question
         goal = [10000000000000 + g for g in goal] # 10000000000000
         dif = a[0]*b[1]-a[1]*b[0]
 
-        a_pr = int((goal[0] * b[1] - b[0] * goal[1]) / dif)
-        b_pr = int((a[0] * goal[1] - goal[0] * a[1]) / dif)
-        if a_pr * a[0] + b_pr * b[0] == goal[0] and a_pr * a[1] + b_pr * b[1] == goal[1] :  # if integer solution exists
-            tokens += 3 * a_pr + b_pr
+        a_p = int((goal[0] * b[1] - b[0] * goal[1]) / dif)
+        b_p = int((a[0] * goal[1] - goal[0] * a[1]) / dif)
+        if a_p * a[0] + b_p * b[0] == goal[0] and a_p * a[1] + b_p * b[1] == goal[1]:
+            tokens += 3 * a_p + b_p
     return tokens
 
 
