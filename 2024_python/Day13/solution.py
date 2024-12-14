@@ -27,7 +27,6 @@ def solve_part1(data):  # solves the question
     for d in data:
         a, b, goal = d
         b_presses = 0
-        cheapestsolve = None
         for a_presses in range(goal[0] // a[0], -1, -1):
             while goal[0] > a[0] * a_presses + b[0] * b_presses:
                 b_presses += 1
@@ -35,17 +34,23 @@ def solve_part1(data):  # solves the question
                 goal[0] == a[0] * a_presses + b[0] * b_presses
                 and goal[1] == a[1] * a_presses + b[1] * b_presses
             ):
-                price = a_presses * 3 + b_presses
-                if not cheapestsolve or cheapestsolve > price:
-                    cheapestsolve = price
+                tokens += a_presses * 3 + b_presses
 
-        if cheapestsolve:
-            tokens += cheapestsolve
     return tokens
 
 
 def solve_part2(data):  # solves the question
-    return data
+    tokens = 0
+    for d in data:
+        a, b, goal = d
+        goal = [10000000000000 + g for g in goal] # 10000000000000
+        dif = a[0]*b[1]-a[1]*b[0]
+
+        a_pr = int((goal[0] * b[1] - b[0] * goal[1]) / dif)
+        b_pr = int((a[0] * goal[1] - goal[0] * a[1]) / dif)
+        if a_pr * a[0] + b_pr * b[0] == goal[0] and a_pr * a[1] + b_pr * b[1] == goal[1] :  # if integer solution exists
+            tokens += 3 * a_pr + b_pr
+    return tokens
 
 
 def main():
