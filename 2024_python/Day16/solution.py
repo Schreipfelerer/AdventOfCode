@@ -3,7 +3,7 @@ def read_input(
         *,
         use_example=False,
 ) -> list:  # Reads the Input cas be set to read from example.txt
-    file_loc = "example.txt" if use_example else "input.txt"
+    file_loc = "example2.txt" if use_example else "input.txt"
     with open(file_loc) as f:
         return f.read().split("\n")
 
@@ -31,13 +31,15 @@ def solve_part1(data):  # solves the question
 def solve_part2(data, cost):  # solves the question
     directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
     best_spots = set()
-    d = 0 if cost[(len(data) - 2, 1, 0)] < cost[(len(data) - 2, 1, 3)] else 3
-    queue = [(len(data) - 2, 1, d)]
+    queue = []
+    if cost[(len(data) - 2, 1, 0)] <= cost[(len(data) - 2, 1, 3)]: queue.append((len(data) - 2, 1, 0))
+    if cost[(len(data) - 2, 1, 3)] <= cost[(len(data) - 2, 1, 0)]: queue.append((len(data) - 2, 1, 3))
     while queue:
         x, y, d = queue.pop(0)
         best_spots.add((x, y))
-        for t in [(x, y, (d+1)%4), (x, y, (d-1)%4), (x-directions[d][0], y-directions[d][1], d)]:
-            if t in cost and cost[t] < cost[(x, y, d)]:
+        for *t, diff in [(x, y, (d+1)%4, 1000), (x, y, (d-1)%4, 1000), (x-directions[d][0], y-directions[d][1], d, 1)]:
+            t = tuple(t)
+            if t in cost and cost[t]+diff == cost[(x, y, d)]:
                 queue.append(t)
     return len(best_spots)
 
