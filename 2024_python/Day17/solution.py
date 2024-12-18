@@ -27,7 +27,7 @@ def solve_part1(data):  # solves the question
             case 3:
                 if reg[0]: p = op[p+1] - 2
             case 4:
-                reg[1] = reg[1] ^ reg[2]#
+                reg[1] = reg[1] ^ reg[2]
             case 5:
                 out.append(str(readCombo(op[p+1], reg) & 7))
             case 6:
@@ -53,7 +53,7 @@ def solve_part2(data):  # solves the question
         for _ in range(8):
             if solve_part1((reg[:], op)) == ",".join([str(x) for x in op[i:]]):
                 break
-            else: reg[0] += 1
+            reg[0] += 1
     return reg[0]
 
 
