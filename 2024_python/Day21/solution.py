@@ -102,6 +102,52 @@ def keyboard_instruction(code):  # noqa: C901
     return "".join(instruction)
 
 
+def complex_keyboard_instruction(code):  # noqa: C901, PLR0912
+    instruction_dict = {}
+    x, y = 2, 0
+    gx, gy = None, None
+    for k in code:
+        for c in k:
+            instruction = []
+            match c:
+                case "^":
+                    gx, gy = 1, 0
+                case "A":
+                    gx, gy = 2, 0
+                case "<":
+                    gx, gy = 0, 1
+                case "v":
+                    gx, gy = 1, 1
+                case ">":
+                    gx, gy = 2, 1
+            if x > gx and (gx != 0 or y != 0):
+                instruction += ["<"]*(x-gx)
+                x = gx
+            if y < gy:
+                instruction += ["v"]*(gy-y)
+                y = gy
+            if y > gy and (x != 0 or gy != 0):
+                instruction += ["^"]*(y-gy)
+                y = gy
+            if x < gx:
+                instruction += [">"]*(gx-x)
+                x = gx
+
+            if x > gx:
+                instruction += ["<"]*(x-gx)
+                x = gx
+            if y > gy:
+                instruction += ["^"]*(y-gy)
+                y = gy
+            instruction.append("A")
+            instruction = "".join(instruction)
+            if instruction in instruction_dict:
+                instruction_dict[instruction] += code[k]
+            else:
+                instruction_dict[instruction] = code[k]
+    return instruction_dict
+
+
 
 def solve_part1(data):  # solves the question
     complexity_score = 0
@@ -116,10 +162,18 @@ def solve_part1(data):  # solves the question
 def solve_part2(data):  # solves the question
     complexity_score = 0
     for code in data:
-        ins = numeric_inputs(code)
-        for _ in range(2):
-            ins = keyboard_instruction(ins)
-        complexity_score += len(ins) * int(code[:-1])
+        ins = {}
+        for d in numeric_inputs(code).split("A")[:-1]:
+            if d+"A" in ins:
+                ins[d+"A"] += 1
+            else:
+                ins[d+"A"] = 1
+        for _ in range(25):
+            ins = complex_keyboard_instruction(ins)
+        length = 0
+        for k in ins:
+            length += ins[k]*len(k)
+        complexity_score += length * int(code[:-1])
     return complexity_score
 
 
