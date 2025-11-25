@@ -15,12 +15,24 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    // TODO: replace with real logic
-    input.lines().count() as i64
+    let mut sum = 0;
+    for line in input.lines().filter(|line| !line.trim().is_empty()){
+        let number: i64 = line.parse().unwrap();
+        sum += number/3-2;
+    }
+    sum
 }
 
 fn part2(input: &str) -> i64 {
-    // TODO: replace with real logic
-    input.lines().count() as i64 * 2
+    let mut sum = 0;
+    for line in input.lines().filter(|line| !line.trim().is_empty()){
+        let number: i64 = line.parse().unwrap();
+        let mut add = number/3-2;
+        while add > 0 {
+            sum += add;
+            add = add/3-2;
+        }
+    }
+    sum
 }
 
