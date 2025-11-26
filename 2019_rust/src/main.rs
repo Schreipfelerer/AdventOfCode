@@ -4,6 +4,7 @@ mod day02;
 mod day03;
 mod day04;
 mod day05;
+mod day06;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -24,6 +25,7 @@ fn main() {
         "3" | "03" => day03::run(input_file, part),
         "4" | "04" => day04::run(input_file, part),
         "5" | "05" => day05::run(input_file, part),
+        "6" | "06" => day06::run(input_file, part),
         _ => eprintln!("Unknown day '{day}'"),
     }
 }
