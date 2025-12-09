@@ -15,33 +15,83 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    let range: Vec<i64> = input.trim().split("-").map(|x| x.parse().unwrap()).collect();
-    let from = range[0];
-    let to = range[1];
-    let mut num = 0;
-    for i in from..=to {
-        let digits : Vec<char> = i.to_string().chars().collect();
-        if digits.is_sorted() && digits.windows(2).any(|w| w[0] == w[1]){
-            num += 1
+    let lines: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
+    let mut movable = 0;
+
+    for y in 0..lines.len() {
+        for x in 0..lines[y].len() {
+            if lines[y][x] != '@' {
+                continue;
+            }
+
+            let mut nearby = 0;
+            for y_offset in -1..=1 {
+                for x_offset in -1..=1 {
+                    if y_offset == 0 && x_offset == 0 {
+                        continue;
+                    }
+                    let nx = x as isize + x_offset;
+                    let ny = y as isize + y_offset;
+                    if ny == -1 || ny == lines.len() as isize {
+                        continue;
+                    }
+                    if nx == -1 || nx == lines[ny as usize].len() as isize {
+                        continue;
+                    }
+                    if lines[ny as usize][nx as usize] == '@' {
+                        nearby += 1
+                    }
+                }
+            }
+            if nearby < 4 {
+                movable += 1
+            }
         }
     }
 
-    num
+    movable
 }
 
 fn part2(input: &str) -> i64 {
-    let range: Vec<i64> = input.trim().split("-").map(|x| x.parse().unwrap()).collect();
-    let from = range[0];
-    let to = range[1];
-    let mut num = 0;
-    for i in from..=to {
-        let mut digits : Vec<char> = i.to_string().chars().collect();
-        digits.push('x');
-        digits.insert(0, '0');
-        if digits.is_sorted() && digits.windows(4).any(|w| w[0] != w[1] && w[1] == w[2] && w[2] != w[3]){
-            num += 1
+    let mut lines: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
+    let mut movable = 0;
+
+    let mut is_changed = true;
+    while is_changed {
+        is_changed = false;
+        for y in 0..lines.len() {
+            for x in 0..lines[y].len() {
+                if lines[y][x] != '@' {
+                    continue;
+                }
+
+                let mut nearby = 0;
+                for y_offset in -1..=1 {
+                    for x_offset in -1..=1 {
+                        if y_offset == 0 && x_offset == 0 {
+                            continue;
+                        }
+                        let nx = x as isize + x_offset;
+                        let ny = y as isize + y_offset;
+                        if ny == -1 || ny == lines.len() as isize {
+                            continue;
+                        }
+                        if nx == -1 || nx == lines[ny as usize].len() as isize {
+                            continue;
+                        }
+                        if lines[ny as usize][nx as usize] == '@' {
+                            nearby += 1
+                        }
+                    }
+                }
+                if nearby < 4 {
+                    movable += 1;
+                    lines[y][x] = '.';
+                    is_changed = true;
+                }
+            }
         }
     }
 
-    num
+    movable
 }
