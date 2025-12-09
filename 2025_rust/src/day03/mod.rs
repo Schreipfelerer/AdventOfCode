@@ -15,100 +15,27 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    let mut points = input.lines().map(to_points);
-    let a = points.next().unwrap();
-    let b = points.next().unwrap();
-    let mut distance = i64::MAX;
-    for pair1 in a.windows(2) {
-        let (x1, y1) = pair1[0];
-        let (x2, y2) = pair1[1];
-        for pair2 in b.windows(2) {
-            let (x3, y3) = pair2[0];
-            let (x4, y4) = pair2[1];
-            if (x1 == x2)
-                && (y3 == y4)
-                && (x3.min(x4) <= x1 && x1 <= x3.max(x4))
-                && (y1.min(y2) <= y3 && y3 <= y1.max(y2))
-            {
-                distance = std::cmp::min(distance, x1.abs() + y3.abs());
-            }
-            if (y1 == y2)
-                && (x3 == x4)
-                && (y3.min(y4) <= y1 && y1 <= y3.max(y4))
-                && (x1.min(x2) <= x3 && x3 <= x1.max(x2))
-            {
-                distance = std::cmp::min(distance, y1.abs() + x3.abs());
-            }
-        }
+    let mut joltage = 0;
+    for line in input.lines(){
+        let max1 = line[..line.len()-1].chars().max().unwrap();
+        let max2 = line[line.find(max1).unwrap()+1..].chars().max().unwrap();
+        joltage += format!("{}{}", max1, max2).parse::<i64>().unwrap()
     }
-    distance
+    joltage
 }
 
 fn part2(input: &str) -> i64 {
-    let mut points = input.lines().map(to_points_steps);
-    let a = points.next().unwrap();
-    let b = points.next().unwrap();
-    let mut distance = i64::MAX;
-    for pair1 in a.windows(2) {
-        let (x1, y1, steps1) = pair1[0];
-        let (x2, y2, _) = pair1[1];
-        for pair2 in b.windows(2) {
-            let (x3, y3, steps2) = pair2[0];
-            let (x4, y4, _) = pair2[1];
-            if (x1 == x2)
-                && (y3 == y4)
-                && (x3.min(x4) <= x1 && x1 <= x3.max(x4))
-                && (y1.min(y2) <= y3 && y3 <= y1.max(y2))
-            {
-                distance = std::cmp::min(distance, steps1 + steps2 + x1.abs_diff(x3) as i64 + y1.abs_diff(y3) as i64);
-            }
-            if (y1 == y2)
-                && (x3 == x4)
-                && (y3.min(y4) <= y1 && y1 <= y3.max(y4))
-                && (x1.min(x2) <= x3 && x3 <= x1.max(x2))
-            {
-                distance = std::cmp::min(distance, steps1 + steps2 + x1.abs_diff(x3) as i64 + y1.abs_diff(y3) as i64);
-            }
+    let mut joltage = 0;
+    for line in input.lines(){
+        let mut startindex = 0;
+        let mut numbers = String::new();
+        for num in (0..12).rev() {
+            let max = line[startindex..line.len()-num].chars().max().unwrap();
+            startindex += 1+line[startindex..].find(max).unwrap();
+            numbers.push(max);
         }
+        joltage += numbers.parse::<i64>().unwrap();
     }
-    distance
+    joltage
 }
 
-fn to_points(input: &str) -> Vec<(i64, i64)> {
-    let mut x = 0;
-    let mut y = 0;
-    let mut points = Vec::new();
-    for inst in input.split(",") {
-        let num: i64 = inst[1..].parse().unwrap();
-        match inst.chars().next().unwrap() {
-            'R' => x += num,
-            'L' => x -= num,
-            'D' => y -= num,
-            'U' => y += num,
-            _ => unreachable!(),
-        }
-        points.push((x, y));
-    }
-    points
-}
-
-
-fn to_points_steps(input: &str) -> Vec<(i64, i64, i64)> {
-    let mut x = 0;
-    let mut y = 0;
-    let mut steps = 0;
-    let mut points = Vec::new();
-    for inst in input.split(",") {
-        let num: i64 = inst[1..].parse().unwrap();
-        steps += num;
-        match inst.chars().next().unwrap() {
-            'R' => x += num,
-            'L' => x -= num,
-            'D' => y -= num,
-            'U' => y += num,
-            _ => unreachable!(),
-        }
-        points.push((x, y, steps));
-    }
-    points
-}
