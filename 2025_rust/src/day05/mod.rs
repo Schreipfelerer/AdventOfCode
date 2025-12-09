@@ -1,3 +1,5 @@
+use std::{ops::RangeInclusive};
+
 use crate::utils::read_input_file;
 
 pub fn run(input_file: &str, part: Option<&String>) {
@@ -15,121 +17,50 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    let mut numbs: Vec<i64> = input
-        .trim()
-        .split(",")
-        .map(|x| x.parse::<i64>().unwrap())
+    let (ranges_str, checks) = input.split_once("\n\n").unwrap();
+    let ranges: Vec<RangeInclusive<i64>> = ranges_str
+        .lines()
+        .map(|range| {
+            let (from, to) = range.split_once("-").unwrap();
+            from.parse::<i64>().unwrap()..=to.parse().unwrap()
+        })
         .collect();
-    let mut pc = 0;
-    let input_data = 1;
-    let mut output_data = -1;
 
-    loop {
-        let opcode = numbs[pc];
-        let pos1 = opcode / 100 % 10;
-        let pos2 = opcode / 1000 % 10;
-        match opcode % 100 {
-            1 | 2 => {
-                let a = numbs[pc + 1];
-                let num_a = if pos1 == 1 { a } else { numbs[a as usize] };
-                let b = numbs[pc + 2];
-                let num_b = if pos2 == 1 { b } else { numbs[b as usize] };
-                let out = numbs[pc + 3] as usize;
-
-                numbs[out] = if opcode % 100 == 1 {
-                    num_a + num_b
-                } else {
-                    num_a * num_b
-                };
-
-                pc += 4;
-            }
-            3 | 4 => {
-                let a = numbs[pc + 1];
-                let num_a = if pos1 == 1 { a } else { numbs[a as usize] };
-                if opcode % 100 == 3 {
-                    numbs[a as usize] = input_data;
-                } else {
-                    output_data = num_a;
-                }
-                pc += 2;
-            }
-            99 => break,
-            _ => unreachable!(),
-        }
-    }
-
-    output_data
+    checks
+        .lines()
+        .filter(|x| {
+            ranges
+                .iter()
+                .any(|range| range.contains(&(x.parse::<i64>().unwrap())))
+        })
+        .count() as i64
 }
 
 fn part2(input: &str) -> i64 {
-    let mut numbs: Vec<i64> = input
-        .trim()
-        .split(",")
-        .map(|x| x.parse::<i64>().unwrap())
-        .collect();
-    let mut pc = 0;
-    let input_data = 5;
-    let mut output_data = -1;
+    let (ranges_str, _) = input.split_once("\n\n").unwrap();
+    let mut ranges: Vec<RangeInclusive<i64>> = ranges_str
+        .lines()
+        .map(|range| {
+            let (from, to) = range.split_once("-").unwrap();
+            from.parse::<i64>().unwrap()..=to.parse().unwrap()
+        }).collect();
 
-    loop {
-        let opcode = numbs[pc];
-        let pos1 = opcode / 100 % 10;
-        let pos2 = opcode / 1000 % 10;
-        match opcode % 100 {
-            1 | 2 => {
-                let a = numbs[pc + 1];
-                let num_a = if pos1 == 1 { a } else { numbs[a as usize] };
-                let b = numbs[pc + 2];
-                let num_b = if pos2 == 1 { b } else { numbs[b as usize] };
-                let out = numbs[pc + 3] as usize;
+    ranges.sort_by_key(|r| *r.start());
 
-                numbs[out] = if opcode % 100 == 1 {
-                    num_a + num_b
-                } else {
-                    num_a * num_b
-                };
+    let mut lower_bound = i64::MIN;
+    let mut included = 0;
 
-                pc += 4;
-            }
-            3 | 4 => {
-                let a = numbs[pc + 1];
-                let num_a = if pos1 == 1 { a } else { numbs[a as usize] };
-                if opcode % 100 == 3 {
-                    numbs[a as usize] = input_data;
-                } else {
-                    output_data = num_a;
-                }
-                pc += 2;
-            }
-            5 | 6 => {
-                let a = numbs[pc + 1];
-                let num_a = if pos1 == 1 { a } else { numbs[a as usize] };
-                let b = numbs[pc + 2];
-                let num_b = if pos2 == 1 { b } else { numbs[b as usize] };
-                pc += 3;
-                if (opcode % 100 == 5) == (num_a != 0) {
-                    pc = num_b as usize;
-                }
-            }
-            7 | 8 => {
-                let a = numbs[pc + 1];
-                let num_a = if pos1 == 1 { a } else { numbs[a as usize] };
-                let b = numbs[pc + 2];
-                let num_b = if pos2 == 1 { b } else { numbs[b as usize] };
-                let out = numbs[pc + 3] as usize;
-
-                numbs[out] = if opcode % 100 == 7 && num_a < num_b || opcode % 100 == 8 && num_a == num_b {
-                    1
-                } else {
-                    0
-                };
-                pc += 4;
-            }
-            99 => break,
-            _ => unreachable!(),
+    for r in ranges{
+        if *r.start() > lower_bound {
+            included += *r.end() - *r.start() + 1;
+            lower_bound = *r.end();
         }
+        else if *r.end() > lower_bound {
+            included += *r.end() - lower_bound;
+            lower_bound = *r.end();
+        }
+
     }
 
-    output_data
+    included
 }
