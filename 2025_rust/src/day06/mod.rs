@@ -1,5 +1,3 @@
-use std::collections::{HashMap, HashSet};
-
 use crate::utils::read_input_file;
 
 pub fn run(input_file: &str, part: Option<&String>) {
@@ -17,41 +15,49 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    let mut orbits = HashMap::new();
-    let mut planets = HashSet::new();
+    let mut problems: Vec<Vec<&str>> = input
+        .lines()
+        .map(|x| x.split_whitespace().collect())
+        .collect();
+    let operants = problems.pop().unwrap();
+    let mut grand_total = 0;
+    for problem in 0..operants.len() {
+        let reduction = if operants[problem] == "+" {
+            i64::strict_add
+        } else {
+            i64::strict_mul
+        };
 
-    for line in input.lines() {
-        let (a, b) = line.split_once(')').unwrap();
-        planets.insert(a);
-        planets.insert(b);
-        orbits.insert(b, a);
+        grand_total += problems
+            .iter()
+            .map(|x| x[problem].parse().unwrap())
+            .reduce(reduction)
+            .unwrap();
     }
-
-    planets.iter().map(|p| get_orbitchain(p, &orbits).iter().count() as i64).sum()
+    grand_total
 }
 
 fn part2(input: &str) -> i64 {
-    let mut orbits = HashMap::new();
-
-    for line in input.lines() {
-        let (a, b) = line.split_once(')').unwrap();
-        orbits.insert(b, a);
-    }
-
-    let you = get_orbitchain("YOU", &orbits);
-    let san = get_orbitchain("SAN", &orbits);
-    let duplicates = you.iter().copied().filter(|x| san.contains(x)).count();
-
-    (you.len() + san.len() - (duplicates * 2)) as i64
-}
-
-fn get_orbitchain<'a>(planet: &str, orbits: &'a HashMap<&'a str, &'a str>) -> Vec<&'a str> {
-    match orbits.get(planet) {
-        Some(parent) => {
-            let mut chain = get_orbitchain(parent, orbits);
-            chain.push(parent);
-            chain
+    let mut total = 0;
+    let mut lines: Vec<Vec<char>> = input.lines().map(|x| x.chars().collect()).collect();
+    let operants = lines.pop().unwrap();
+    let mut numbers: Vec<i64> = Vec::new();
+    for index in (0..lines[0].len()).rev() {
+        let top_down_number: String = lines.iter().map(|x| x[index]).collect();
+        let trimmed = top_down_number.trim();
+        if trimmed.is_empty() {
+            numbers = Vec::new();
+            continue;
         }
-        None => Vec::new(),
+        numbers.push(trimmed.parse().unwrap());
+        if operants[index] != ' ' {
+            let operant = if operants[index] == '+' {
+                i64::strict_add
+            } else {
+                i64::strict_mul
+            };
+            total += numbers.iter().copied().reduce(operant).unwrap();
+        }
     }
+    total
 }
