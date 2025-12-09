@@ -1,7 +1,7 @@
 use crate::utils::read_input_file;
 
 pub fn run(input_file: &str, part: Option<&String>) {
-    let input = read_input_file("day01", input_file);
+    let input = read_input_file("day22", input_file);
 
     match part.map(|s| s.as_str()) {
         Some("1") => println!("Part 1: {}", part1(&input)),
@@ -15,12 +15,10 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    // TODO: replace with real logic
     input.lines().count() as i64
 }
 
 fn part2(input: &str) -> i64 {
-    // TODO: replace with real logic
-    input.lines().count() as i64 * 2
+    input.lines().count() as i64 *2 
 }
 
