@@ -15,24 +15,34 @@ pub fn run(input_file: &str, part: Option<&String>) {
 }
 
 fn part1(input: &str) -> i64 {
-    let mut sum = 0;
-    for line in input.lines().filter(|line| !line.trim().is_empty()){
-        let number: i64 = line.parse().unwrap();
-        sum += number/3-2;
+    let mut dial = 50;
+    let mut zeros = 0;
+    for line in input.lines(){
+        let mult = if line.starts_with("L") {-1} else {1};
+        let change: i64 = line[1..].parse().unwrap();
+        dial += change * mult;
+        dial %= 100;
+        if dial == 0 {zeros += 1}
     }
-    sum
+    zeros
 }
 
 fn part2(input: &str) -> i64 {
-    let mut sum = 0;
-    for line in input.lines().filter(|line| !line.trim().is_empty()){
-        let number: i64 = line.parse().unwrap();
-        let mut add = number/3-2;
-        while add > 0 {
-            sum += add;
-            add = add/3-2;
+    let mut dial = 50;
+    let mut zeros = 0;
+    for line in input.lines(){
+        let mult = if line.starts_with("L") {-1} else {1};
+        let change: i64 = line[1..].parse().unwrap();
+        if dial == 0 && mult == -1 {zeros -= 1}
+        dial += change * mult;
+        if mult == 1 {
+            zeros += dial/100;
         }
+        else {
+            zeros += (dial-100)/-100
+        }
+        dial = dial.rem_euclid(100);
     }
-    sum
+    zeros
 }
 
