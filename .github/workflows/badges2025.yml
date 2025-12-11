@@ -1,4 +1,4 @@
-name: Advent of Code Badges
+name: Advent of Code Badges 2025
 on:
   workflow_dispatch:
   push:

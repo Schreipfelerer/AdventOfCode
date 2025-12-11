@@ -1,9 +1,9 @@
-name: Advent of Code Badges
+name: Advent of Code Badges 2016
 on:
   workflow_dispatch:
   push:
     paths:
-      - '2016*/'
+      - '2016*/**'
 jobs:
   build:
     name: Update badges
