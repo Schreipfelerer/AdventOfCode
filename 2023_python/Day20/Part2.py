@@ -1,9 +1,11 @@
-def readInput(use_example=False) -> list:  # Reads the Input cas be set to read from example.txt
+def readInput(
+    use_example=False,
+) -> list:  # Reads the Input cas be set to read from example.txt
     if use_example:
-        with open('example.txt', 'r') as f:
+        with open("example.txt", "r") as f:
             return f.readlines()
     else:
-        with open('input.txt', 'r') as f:
+        with open("input.txt", "r") as f:
             return f.readlines()
 
 
@@ -34,16 +36,25 @@ def parseInput(lines):  # parses the input to the desired typ
 
 
 def solve(data):  # solves the question
+    # yes i hate this, there are so many assumptions here i truly hate itq
     button_presses = 0
     broadcast, flipflops, conjunction = data
+    last = last = next(
+        (key for key, val in conjunction.items() if "rx" in val[1]), None
+    )
+    goals = [key for key, val in conjunction.items() if last in val[1]]
+    prod = 1
     while True:
         button_presses += 1
         to_send = [("broadcast", False, "button")]
         while to_send:
             to, signal, fro = to_send.pop(0)
 
-            if to == "rx" and not signal:
-                return button_presses
+            if to == last and signal and fro in goals:
+                goals.remove(fro)
+                prod *= button_presses
+                if not goals:
+                    return prod
 
             if to == "broadcast":
                 for s in broadcast:
