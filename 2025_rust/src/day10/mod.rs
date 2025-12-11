@@ -1,5 +1,5 @@
-use z3::{ast::Int, Config, Context, Optimize, Solver};
 use crate::utils::read_input_file;
+use z3::{Config, Context, Optimize, Solver, ast::Int};
 
 pub fn run(input_file: &str, part: Option<&String>) {
     let input = read_input_file("day10", input_file);
@@ -67,7 +67,7 @@ fn part2(input: &str) -> i64 {
         .lines()
         .map(|x| x.split_once("] (").unwrap().1.split_once(") {").unwrap())
     {
-        let options = options_raw
+        let buttons = options_raw
             .split(") (")
             .map(|d| {
                 d.split(',')
@@ -75,7 +75,7 @@ fn part2(input: &str) -> i64 {
                     .collect_vec()
             })
             .collect_vec();
-        let wanted_state = requirements_raw
+        let target = requirements_raw
             .trim_end_matches('}')
             .split(',')
             .map(|f| f.parse::<i64>().unwrap())
@@ -83,8 +83,33 @@ fn part2(input: &str) -> i64 {
 
         let opt = Optimize::new();
 
+        let presses: Vec<Int> = vec![];
+        // for every button
+        for i in 0..buttons.len() {
+            let counter = Int::fresh_const(format!("button_{}", i));
+            presses.push(counter);
+            opt.assert(&counter.ge(0));
+        }
+        let total_presses = Int::fresh_const("total_presses");
+        // for every target
+
+
+        opt.assert(&total_presses.eq(Int::add(&presses)));
+        opt.minimize(&total_presses);
+
+        opt.assert(&total_presses.eq(Int::add(&button_presses)));
+        opt.minimize(&total_presses);
+
+        total_presses += match opt.check(&[]) {
+            SatResult::Sat => opt
+                .get_model()
+                .unwrap()
+                .eval(&total_presses, true)
+                .and_then(|t| t.as_i64())
+                .unwrap(),
+            _ => panic!("No solution found"),
+        }
     }
 
     total_presses
 }
-

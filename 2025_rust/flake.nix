@@ -18,7 +18,12 @@
           buildInputs = [
             pkgs.rust-bin.stable.latest.complete
             pkgs.cargo-watch
+            pkgs.clang
+            pkgs.llvmPackages.libclang
           ];
+          shellHook = ''
+            export LIBCLANG_PATH=${pkgs.llvmPackages.libclang}/lib
+          '';
         };
       }
     );
