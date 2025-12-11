@@ -12,17 +12,26 @@
       let
         overlays = [ rust-overlay.overlays.default ];
         pkgs = import nixpkgs { inherit system overlays; };
+        clangVersion = pkgs.lib.versions.major pkgs.llvmPackages.libclang.version;
       in
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.rust-bin.stable.latest.complete
             pkgs.cargo-watch
-            pkgs.clang
             pkgs.llvmPackages.libclang
+            pkgs.llvmPackages.clang
+            pkgs.z3.dev
+            # Sometimes helpful to explicitly include glibc headers if stdio.h fails later
+            pkgs.glibc.dev
           ];
           shellHook = ''
-            export LIBCLANG_PATH=${pkgs.llvmPackages.libclang}/lib
+            export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib"
+            export BINDGEN_EXTRA_CLANG_ARGS="
+              -I ${pkgs.z3.dev}/include
+              -isystem ${pkgs.llvmPackages.libclang.lib}/lib/clang/${clangVersion}/include
+              -isystem ${pkgs.glibc.dev}/include
+            "
           '';
         };
       }

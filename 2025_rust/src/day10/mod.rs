@@ -1,5 +1,6 @@
 use crate::utils::read_input_file;
-use z3::{Config, Context, Optimize, Solver, ast::Int};
+use itertools::Itertools;
+use z3::{Optimize, ast::Int, SatResult};
 
 pub fn run(input_file: &str, part: Option<&String>) {
     let input = read_input_file("day10", input_file);
@@ -62,7 +63,7 @@ fn try_presses(
 }
 
 fn part2(input: &str) -> i64 {
-    let mut total_presses: i64 = 0;
+    let mut total_presses_num: i64 = 0;
     for (options_raw, requirements_raw) in input
         .lines()
         .map(|x| x.split_once("] (").unwrap().1.split_once(") {").unwrap())
@@ -83,24 +84,30 @@ fn part2(input: &str) -> i64 {
 
         let opt = Optimize::new();
 
-        let presses: Vec<Int> = vec![];
+        let mut presses: Vec<Int> = vec![];
         // for every button
         for i in 0..buttons.len() {
-            let counter = Int::fresh_const(format!("button_{}", i));
-            presses.push(counter);
+            let counter = Int::fresh_const(&format!("button_{}", i));
             opt.assert(&counter.ge(0));
+            presses.push(counter);
         }
         let total_presses = Int::fresh_const("total_presses");
         // for every target
+        let mut targets: Vec<Int> = vec![];
+        for (i, t) in target.iter().enumerate(){
+            let t_int = Int::fresh_const(&format!("target_{}", i));
+            opt.assert(&t_int.eq(*t));
+            let relevant_buttons = (0..buttons.len()).filter(|l| buttons[*l].iter().any(|bb| *bb == i)).map(|i| &presses[i]).collect_vec();
+            opt.assert(&t_int.eq(Int::add(&relevant_buttons)));
+            targets.push(t_int);
+        }
 
 
         opt.assert(&total_presses.eq(Int::add(&presses)));
         opt.minimize(&total_presses);
 
-        opt.assert(&total_presses.eq(Int::add(&button_presses)));
-        opt.minimize(&total_presses);
 
-        total_presses += match opt.check(&[]) {
+        let presses = match opt.check(&[]) {
             SatResult::Sat => opt
                 .get_model()
                 .unwrap()
@@ -108,8 +115,9 @@ fn part2(input: &str) -> i64 {
                 .and_then(|t| t.as_i64())
                 .unwrap(),
             _ => panic!("No solution found"),
-        }
+        };
+        total_presses_num += presses;
     }
 
-    total_presses
+    total_presses_num
 }
